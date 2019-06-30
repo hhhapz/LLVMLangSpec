@@ -4,7 +4,7 @@ The instructions in this category are the conversion instructions
 (casting) which all take a single operand and a type. They perform
 various bit conversions on the operand.
 
-#### \'`trunc .. to`\' Instruction {#i_trunc}
+#### \'`trunc .. to`\' Instruction
 
 ##### Syntax:
 
@@ -38,7 +38,7 @@ will always truncate bits.
 %W = trunc <2 x i16> <i16 8, i16 7> to <2 x i8> ; yields <i8 8, i8 7>
 ```
 
-#### \'`zext .. to`\' Instruction {#i_zext}
+#### \'`zext .. to`\' Instruction
 
 ##### Syntax:
 
@@ -71,7 +71,7 @@ When zero extending from i1, the result will always be either 0 or 1.
 %Z = zext <2 x i16> <i16 8, i16 7> to <2 x i32> ; yields <i32 8, i32 7>
 ```
 
-#### \'`sext .. to`\' Instruction {#i_sext}
+#### \'`sext .. to`\' Instruction
 
 ##### Syntax:
 
@@ -316,7 +316,7 @@ rounding mode.
 %Y = sitofp i8 -1 to double          ; yields double:-1.0
 ```
 
-#### \'`ptrtoint .. to`\' Instruction {#i_ptrtoint}
+#### \'`ptrtoint .. to`\' Instruction
 
 ##### Syntax:
 
@@ -352,7 +352,7 @@ nothing is done (*no-op cast*) other than a type change.
 %Z = ptrtoint <4 x i32*> %P to <4 x i64>; yields vector zero extension for a vector of addresses on 32-bit architecture
 ```
 
-#### \'`inttoptr .. to`\' Instruction {#i_inttoptr}
+#### \'`inttoptr .. to`\' Instruction
 
 ##### Syntax:
 
@@ -388,7 +388,7 @@ nothing is done (*no-op cast*).
 %Z = inttoptr <4 x i32> %G to <4 x i8*>; yields truncation of vector G to four pointers
 ```
 
-#### \'`bitcast .. to`\' Instruction {#i_bitcast}
+#### \'`bitcast .. to`\' Instruction
 
 ##### Syntax:
 
@@ -431,7 +431,7 @@ first.
 %Z = bitcast <2 x i32*> %V to <2 x i64*> ; yields <2 x i64*>
 ```
 
-#### \'`addrspacecast .. to`\' Instruction {#i_addrspacecast}
+#### \'`addrspacecast .. to`\' Instruction
 
 ##### Syntax:
 

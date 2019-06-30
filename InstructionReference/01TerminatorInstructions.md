@@ -1,4 +1,4 @@
-#### `ret` Instruction {#i_ret}
+#### `ret` Instruction 
 
 ##### Syntax:
 
@@ -45,7 +45,7 @@ ret void                        ; Return from a void function
 ret { i32, i8 } { i32 4, i8 2 } ; Return a struct of values 4 and 2
 ```
 
-#### `br` Instruction {#i_br}
+#### `br` Instruction 
 
 ##### Syntax:
 
@@ -84,7 +84,7 @@ IfUnequal:
   ret i32 0
 ```
 
-#### `switch` Instruction {#i_switch}
+#### `switch` Instruction 
 
 ##### Syntax:
 
@@ -135,7 +135,7 @@ switch i32 %val, label %otherwise [ i32 0, label %onzero
                                     i32 2, label %ontwo ]
 ```
 
-#### `indirectbr` Instruction {#i_indirectbr}
+#### `indirectbr` Instruction 
 
 ##### Syntax:
 
@@ -175,7 +175,7 @@ This is typically implemented with a jump through a register.
 indirectbr i8* %Addr, [ label %bb1, label %bb2, label %bb3 ]
 ```
 
-#### `invoke` Instruction {#i_invoke}
+#### `invoke` Instruction 
 
 ##### Syntax:
 
@@ -272,7 +272,7 @@ return value is available.
             unwind label %TestCleanup              ; i32:retval set
 ```
 
-#### `resume` Instruction {#i_resume}
+#### `resume` Instruction 
 
 ##### Syntax:
 
@@ -301,7 +301,7 @@ The `resume` instruction resumes propagation of an existing
 resume { i8*, i32 } %exn
 ```
 
-#### `catchswitch` Instruction {#i_catchswitch}
+#### `catchswitch` Instruction 
 
 ##### Syntax:
 
@@ -351,7 +351,7 @@ dispatch2:
   %cs2 = catchswitch within %parenthandler [label %handler0] unwind label %cleanup
 ```
 
-#### `catchret` Instruction {#i_catchret}
+#### `catchret` Instruction 
 
 ##### Syntax:
 
@@ -390,7 +390,7 @@ most-recently-entered not-yet-exited funclet pad (as described in the
 catchret from %catch label %continue
 ```
 
-#### `cleanupret` Instruction {#i_cleanupret}
+#### `cleanupret` Instruction 
 
 ##### Syntax:
 
@@ -434,7 +434,7 @@ cleanupret from %cleanup unwind to caller
 cleanupret from %cleanup unwind label %continue
 ```
 
-#### `unreachable` Instruction {#i_unreachable}
+#### `unreachable` Instruction 
 
 ##### Syntax:
 

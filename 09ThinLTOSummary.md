@@ -1,5 +1,5 @@
 
-ThinLTO Summary {#summary}
+ThinLTO Summary
 ---------------
 
 Compiling with [ThinLTO](https://clang.llvm.org/docs/ThinLTO.html)
@@ -27,7 +27,7 @@ There are currently 3 types of summary entries in the LLVM assembly:
 `global values<gv_summary>`{.interpreted-text role="ref"}, and
 `type identifiers<typeid_summary>`{.interpreted-text role="ref"}.
 
-### Module Path Summary Entry {#module_path_summary}
+### Module Path Summary Entry
 
 Each module path summary entry lists a module containing global values
 included in the summary. For a single IR module there will be one such
@@ -44,7 +44,7 @@ The `path` field is a string path to the bitcode file, and the `hash`
 field is the 160-bit SHA-1 hash of the IR bitcode contents, used for
 incremental builds and caching.
 
-### Global Value Summary Entry {#gv_summary}
+### Global Value Summary Entry
 
 Each global value summary entry corresponds to a global value defined or
 referenced by a summarized module.
@@ -65,7 +65,7 @@ Each `Summary` format will depend on whether the global value is a
 `variable<variable_summary>`{.interpreted-text role="ref"}, or
 `alias<alias_summary>`{.interpreted-text role="ref"}.
 
-#### Function Summary {#function_summary}
+#### Function Summary
 
 If the global value is a function, the `Summary` entry will look like:
 
@@ -85,7 +85,7 @@ fields: `FuncFlags<funcflags_summary>`{.interpreted-text role="ref"},
 `TypeIdInfo<typeidinfo_summary>`{.interpreted-text role="ref"},
 `Refs<refs_summary>`{.interpreted-text role="ref"}.
 
-#### Global Variable Summary {#variable_summary}
+#### Global Variable Summary
 
 If the global value is a variable, the `Summary` entry will look like:
 
@@ -97,7 +97,7 @@ The variable entry contains a subset of the fields in a
 `function summary <function_summary>`{.interpreted-text role="ref"}, see
 the descriptions there.
 
-#### Alias Summary {#alias_summary}
+#### Alias Summary
 
 If the global value is an alias, the `Summary` entry will look like:
 
@@ -110,7 +110,7 @@ The `module` and `flags` fields are as described for a
 `aliasee` field contains a reference to the global value summary entry
 of the aliasee.
 
-#### Function Flags {#funcflags_summary}
+#### Function Flags
 
 The optional `FuncFlags` field looks like:
 
@@ -121,7 +121,7 @@ funcFlags: (readNone: 0, readOnly: 0, noRecurse: 0, returnDoesNotAlias: 0)
 If unspecified, flags are assumed to hold the conservative `false` value
 of `0`.
 
-#### Calls {#calls_summary}
+#### Calls
 
 The optional `Calls` field looks like:
 
@@ -141,7 +141,7 @@ of `hotness` (which can take the values `Unknown`, `Cold`, `None`,
 frequency relative to the entry frequency, scaled down by 2\^8) may be
 specified. The defaults are `Unknown` and `0`, respectively.
 
-#### Refs {#refs_summary}
+#### Refs
 
 The optional `Refs` field looks like:
 
@@ -152,7 +152,7 @@ refs: ((Ref)[, (Ref)]*)
 where each `Ref` contains a reference to the summary id of the
 referenced value (e.g. `^1`).
 
-#### TypeIdInfo {#typeidinfo_summary}
+#### TypeIdInfo
 
 The optional `TypeIdInfo` field, used for [Control Flow
 Integrity](http://clang.llvm.org/docs/ControlFlowIntegrity.html), looks
@@ -222,7 +222,7 @@ typeCheckedLoadConstVCalls: (ConstVCall[, ConstVCall]*)
 Where each ConstVCall has the format described for
 `TypeTestAssumeConstVCalls`.
 
-### Type ID Summary Entry {#typeid_summary}
+### Type ID Summary Entry
 
 Each type id summary entry corresponds to a type identifier resolution
 which is generated during the LTO link portion of the compile when

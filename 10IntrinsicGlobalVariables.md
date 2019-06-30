@@ -1,4 +1,4 @@
-Intrinsic Global Variables {#intrinsicglobalvariables}
+Intrinsic Global Variables
 --------------------------
 
 LLVM has a number of \"magic\" global variables that contain data that
@@ -7,7 +7,7 @@ All globals of this sort should have a section specified as
 \"`llvm.metadata`\". This section and all globals that start with
 \"`llvm.`\" are reserved for use by LLVM.
 
-### The \'`llvm.used`\' Global Variable {#gv_llvmused}
+### The \'`llvm.used`\' Global Variable
 
 The `@llvm.used` global is an array which has
 `appending linkage <linkage_appending>`{.interpreted-text role="ref"}.
@@ -38,7 +38,7 @@ On some targets, the code generator must emit a directive to the
 assembler or object file to prevent the assembler and linker from
 molesting the symbol.
 
-### The \'`llvm.compiler.used`\' Global Variable {#gv_llvmcompilerused}
+### The \'`llvm.compiler.used`\' Global Variable
 
 The `@llvm.compiler.used` directive is the same as the `@llvm.used`
 directive, except that it only prevents the compiler from touching the
@@ -49,7 +49,7 @@ by `@llvm.used`.
 This is a rare construct that should only be used in rare circumstances,
 and should not be exposed to source languages.
 
-### The \'`llvm.global_ctors`\' Global Variable {#gv_llvmglobalctors}
+### The \'`llvm.global_ctors`\' Global Variable
 
 ``` {.llvm}
 %0 = type { i32, void ()*, i8* }
@@ -66,7 +66,7 @@ If the third field is present, non-null, and points to a global variable
 or function, the initializer function will only run if the associated
 data from the current module is not discarded.
 
-### The \'`llvm.global_dtors`\' Global Variable {#llvmglobaldtors}
+### The \'`llvm.global_dtors`\' Global Variable
 
 ``` {.llvm}
 %0 = type { i32, void ()*, i8* }

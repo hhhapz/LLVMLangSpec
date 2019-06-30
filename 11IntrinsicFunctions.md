@@ -1,4 +1,4 @@
-Intrinsic Functions {#intrinsics}
+Intrinsic Functions
 -------------------
 
 LLVM supports the notion of an \"intrinsic function\". These functions
@@ -44,7 +44,7 @@ its own name suffix.
 To learn how to add an intrinsic function, please see the [Extending
 LLVM Guide](ExtendingLLVM.html).
 
-### Variable Argument Handling Intrinsics {#int_varargs}
+### Variable Argument Handling Intrinsics
 
 Variable argument support is defined in LLVM with the
 `va_arg <i_va_arg>`{.interpreted-text role="ref"} instruction and these
@@ -93,7 +93,7 @@ declare void @llvm.va_copy(i8*, i8*)
 declare void @llvm.va_end(i8*)
 ```
 
-#### \'`llvm.va_start`\' Intrinsic {#int_va_start}
+#### \'`llvm.va_start`\' Intrinsic
 
 ##### Syntax:
 
@@ -141,7 +141,7 @@ element to which the argument points. Calls to
 `llvm.va_copy <int_va_copy>`{.interpreted-text role="ref"} must be
 matched exactly with calls to `llvm.va_end`.
 
-#### \'`llvm.va_copy`\' Intrinsic {#int_va_copy}
+#### \'`llvm.va_copy`\' Intrinsic
 
 ##### Syntax:
 
@@ -193,7 +193,7 @@ differences in approach are covered in the [Garbage Collection with
 LLVM](GarbageCollection.html) documentation. The intrinsics themselves
 are described in `Statepoints`{.interpreted-text role="doc"}.
 
-#### \'`llvm.gcroot`\' Intrinsic {#int_gcroot}
+#### \'`llvm.gcroot`\' Intrinsic
 
 ##### Syntax:
 
@@ -219,7 +219,7 @@ information to allow the runtime to find the pointer at GC safe points.
 The \'`llvm.gcroot`\' intrinsic may only be used in a function which
 `specifies a GC algorithm <gc>`{.interpreted-text role="ref"}.
 
-#### \'`llvm.gcread`\' Intrinsic {#int_gcread}
+#### \'`llvm.gcread`\' Intrinsic
 
 ##### Syntax:
 
@@ -246,7 +246,7 @@ the garbage collector runtime, as needed. The \'`llvm.gcread`\'
 intrinsic may only be used in a function which `specifies a GC
 algorithm <gc>`{.interpreted-text role="ref"}.
 
-#### \'`llvm.gcwrite`\' Intrinsic {#int_gcwrite}
+#### \'`llvm.gcwrite`\' Intrinsic
 
 ##### Syntax:
 
@@ -418,7 +418,7 @@ access the escaped allocas. The \'`llvm.localescape`\' intrinsic blocks
 inlining, as inlining changes where the escaped allocas are allocated,
 which would break attempts to use \'`llvm.localrecover`\'.
 
-#### \'`llvm.read_register`\' and \'`llvm.write_register`\' Intrinsics[]{#int_read_register} {#int_write_register}
+#### \'`llvm.read_register`\' and \'`llvm.write_register`\' Intrinsics[]
 
 ##### Syntax:
 
@@ -454,7 +454,7 @@ architectures (ARM, AArch64, PowerPC and x86\_64). Significant amount of
 work is needed to support other registers and even more so, allocatable
 registers.
 
-#### \'`llvm.stacksave`\' Intrinsic {#int_stacksave}
+#### \'`llvm.stacksave`\' Intrinsic
 
 ##### Syntax:
 
@@ -479,7 +479,7 @@ practice, this pops any `alloca <i_alloca>`{.interpreted-text
 role="ref"} blocks from the stack that were allocated after the
 `llvm.stacksave` was executed.
 
-#### \'`llvm.stackrestore`\' Intrinsic {#int_stackrestore}
+#### \'`llvm.stackrestore`\' Intrinsic
 
 ##### Syntax:
 
@@ -498,7 +498,7 @@ automatic variable sized arrays in C99.
 See the description for
 `llvm.stacksave <int_stacksave>`{.interpreted-text role="ref"}.
 
-#### \'`llvm.get.dynamic.area.offset`\' Intrinsic {#int_get_dynamic_area_offset}
+#### \'`llvm.get.dynamic.area.offset`\' Intrinsic
 
 ##### Syntax:
 
@@ -779,7 +779,7 @@ functions. These intrinsics allow source-language front-ends to pass
 information about the alignment of the pointer arguments to the code
 generator, providing opportunity for more efficient code generation.
 
-#### \'`llvm.memcpy`\' Intrinsic {#int_memcpy}
+#### \'`llvm.memcpy`\' Intrinsic
 
 ##### Syntax:
 
@@ -825,7 +825,7 @@ known to be aligned to some boundary, this can be specified as the
 fourth argument, otherwise it should be set to 0 or 1 (both meaning no
 alignment).
 
-#### \'`llvm.memmove`\' Intrinsic {#int_memmove}
+#### \'`llvm.memmove`\' Intrinsic
 
 ##### Syntax:
 
@@ -872,7 +872,7 @@ copies \"len\" bytes of memory over. If the argument is known to be
 aligned to some boundary, this can be specified as the fourth argument,
 otherwise it should be set to 0 or 1 (both meaning no alignment).
 
-#### \'`llvm.memset.*`\' Intrinsics {#int_memset}
+#### \'`llvm.memset.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -1808,7 +1808,7 @@ then the result is the size in bits of the type of `src` if
 `is_zero_undef == 0` and `undef` otherwise. For example,
 `llvm.cttz(2) = 1`.
 
-#### \'`llvm.fshl.*`\' Intrinsic {#int_overflow}
+#### \'`llvm.fshl.*`\' Intrinsic
 
 ##### Syntax:
 
@@ -2765,7 +2765,7 @@ it is first converted to float if needed, then converted to i16 with
 `llvm.convert.to.fp16 <int_convert_to_fp16>`{.interpreted-text
 role="ref"}, then storing as an i16 value.
 
-#### \'`llvm.convert.to.fp16`\' Intrinsic {#int_convert_to_fp16}
+#### \'`llvm.convert.to.fp16`\' Intrinsic
 
 ##### Syntax:
 
@@ -2797,7 +2797,7 @@ converted number.
 store i16 %res, i16* @x, align 2
 ```
 
-#### \'`llvm.convert.from.fp16`\' Intrinsic {#int_convert_from_fp16}
+#### \'`llvm.convert.from.fp16`\' Intrinsic
 
 ##### Syntax:
 
@@ -2829,7 +2829,7 @@ represented by an `i16` value.
 %res = call float @llvm.convert.from.fp16(i16 %a)
 ```
 
-### Debugger Intrinsics {#dbg_intrinsics}
+### Debugger Intrinsics
 
 The LLVM debugger intrinsics (which all start with `llvm.dbg.` prefix),
 are described in the [LLVM Source Level
@@ -2841,7 +2841,7 @@ The LLVM exception handling intrinsics (which all start with `llvm.eh.`
 prefix), are described in the [LLVM Exception
 Handling](ExceptionHandling.html#format-common-intrinsics) document.
 
-### Trampoline Intrinsics {#int_trampoline}
+### Trampoline Intrinsics
 
 These intrinsics make it possible to excise one parameter, marked with
 the `nest <nest>`{.interpreted-text role="ref"} attribute, from a
@@ -2867,7 +2867,7 @@ call i8* @llvm.init.trampoline(i8* %tramp1, i8* bitcast (i32 (i8*, i32, i32)* @f
 The call `%val = call i32 %fp(i32 %x, i32 %y)` is then equivalent to
 `%val = call i32 %f(i8* %nval, i32 %x, i32 %y)`.
 
-#### \'`llvm.init.trampoline`\' Intrinsic {#int_it}
+#### \'`llvm.init.trampoline`\' Intrinsic
 
 ##### Syntax:
 
@@ -2905,7 +2905,7 @@ calling `llvm.init.trampoline`, the memory pointed to by `tramp` is
 modified, then the effect of any later call to the returned function
 pointer is undefined.
 
-#### \'`llvm.adjust.trampoline`\' Intrinsic {#int_at}
+#### \'`llvm.adjust.trampoline`\' Intrinsic
 
 ##### Syntax:
 
@@ -2931,7 +2931,7 @@ performing the required machine specific adjustments. The pointer
 returned can then be
 `bitcast and executed <int_trampoline>`{.interpreted-text role="ref"}.
 
-### Masked Vector Load and Store Intrinsics {#int_mload_mstore}
+### Masked Vector Load and Store Intrinsics
 
 LLVM provides intrinsics for predicated vector load and store
 operations. The predicate is specified by a mask operand, which holds
@@ -2941,7 +2941,7 @@ accessed. When all bits of the mask are on, the intrinsic is identical
 to a regular vector load or store. When all bits are off, no memory is
 accessed.
 
-#### \'`llvm.masked.load.*`\' Intrinsics {#int_mload}
+#### \'`llvm.masked.load.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -2991,7 +2991,7 @@ access to masked-off lanes.
     %loadlal = load <16 x float>, <16 x float>* %ptr, align 4
     %res = select <16 x i1> %mask, <16 x float> %loadlal, <16 x float> %passthru
 
-#### \'`llvm.masked.store.*`\' Intrinsics {#int_mstore}
+#### \'`llvm.masked.store.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -3051,7 +3051,7 @@ associated vector lane on or off. The memory addresses corresponding to
 the \"off\" lanes are not accessed. When all bits are off, no memory is
 accessed.
 
-#### \'`llvm.masked.gather.*`\' Intrinsics {#int_mgather}
+#### \'`llvm.masked.gather.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -3115,7 +3115,7 @@ facilitates vectorization of predicated basic blocks.
     %vec012  = insertelement <4 x double>%vec01, %val2, 2
     %vec0123 = insertelement <4 x double>%vec012, %val3, 3
 
-#### \'`llvm.masked.scatter.*`\' Intrinsics {#int_mscatter}
+#### \'`llvm.masked.scatter.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -3187,7 +3187,7 @@ respectively. Note that when the mask starts with \'1\' bits followed by
 `llvm.masked.store <int_mstore>`{.interpreted-text role="ref"} and
 `llvm.masked.load <int_mload>`{.interpreted-text role="ref"}.
 
-#### \'`llvm.masked.expandload.*`\' Intrinsics {#int_expandload}
+#### \'`llvm.masked.expandload.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -3256,7 +3256,7 @@ lowering it into a sequence of conditional scalar load operations and
 shuffles. If all mask elements are \'1\', the intrinsic behavior is
 equivalent to the regular unmasked vector load.
 
-#### \'`llvm.masked.compressstore.*`\' Intrinsics {#int_compressstore}
+#### \'`llvm.masked.compressstore.*`\' Intrinsics
 
 ##### Syntax:
 
@@ -3326,7 +3326,7 @@ operations.
 This class of intrinsics provides information about the lifetime of
 memory objects and ranges where variables are immutable.
 
-#### \'`llvm.lifetime.start`\' Intrinsic {#int_lifestart}
+#### \'`llvm.lifetime.start`\' Intrinsic
 
 ##### Syntax:
 
@@ -3350,7 +3350,7 @@ of the memory pointed to by `ptr` is dead. This means that it is known
 to never be used and has an undefined value. A load from the pointer
 that precedes this intrinsic can be replaced with `'undef'`.
 
-#### \'`llvm.lifetime.end`\' Intrinsic {#int_lifeend}
+#### \'`llvm.lifetime.end`\' Intrinsic
 
 ##### Syntax:
 
@@ -3484,7 +3484,7 @@ Returns another pointer that aliases its argument but which has no
 associated `invariant.group` metadata. It does not read any memory and
 can be speculated.
 
-### Constrained Floating-Point Intrinsics {#constrainedfp}
+### Constrained Floating-Point Intrinsics
 
 These intrinsics are used to provide special handling of floating-point
 operations when specific rounding mode or floating-point exception
@@ -4549,7 +4549,7 @@ constant value, variables are not allowed.
 
 This intrinsic is lowered to the `val`.
 
-#### \'`llvm.assume`\' Intrinsic {#int_assume}
+#### \'`llvm.assume`\' Intrinsic
 
 ##### Syntax:
 
@@ -4582,7 +4582,7 @@ code quality. For this reason, `llvm.assume` should not be used to
 document basic mathematical invariants that the optimizer can otherwise
 deduce or facts that are of little use to the optimizer.
 
-#### \'`llvm.ssa_copy`\' Intrinsic {#int_ssa_copy}
+#### \'`llvm.ssa_copy`\' Intrinsic
 
 ##### Syntax:
 
@@ -4601,7 +4601,7 @@ various forms of information to operands that dominate specific uses. It
 is not meant for general use, only for building temporary renaming forms
 that require value splits at certain points.
 
-#### \'`llvm.type.test`\' Intrinsic {#type.test}
+#### \'`llvm.type.test`\' Intrinsic
 
 ##### Syntax:
 
@@ -4747,7 +4747,7 @@ inlined into.
 All declarations of `@llvm.experimental.deoptimize` must share the same
 calling convention.
 
-##### Lowering: {#deoptimize_lowering}
+##### Lowering:
 
 Calls to `@llvm.experimental.deoptimize` are lowered to calls to the
 symbol `__llvm_deoptimize` (it is the frontend\'s responsibility to
@@ -4847,11 +4847,11 @@ br i1 %cond, label %solution_1, label %solution_2
 
 > label %fast\_path:
 >
-> :   ; Apply memory-consuming but fast solution for a task.
+> ; Apply memory-consuming but fast solution for a task.
 >
 > label %slow\_path:
 >
-> :   ; Cheap in memory but slow solution.
+> ; Cheap in memory but slow solution.
 >
 Whether the result of intrinsic\'s call is [true]{.title-ref} or
 [false]{.title-ref}, it should be correct to pick either solution. We
@@ -5024,7 +5024,7 @@ These intrinsics are similar to the standard library memory intrinsics
 except that they perform memory transfer as a sequence of atomic memory
 accesses.
 
-#### \'`llvm.memcpy.element.unordered.atomic`\' Intrinsic {#int_memcpy_element_unordered_atomic}
+#### \'`llvm.memcpy.element.unordered.atomic`\' Intrinsic
 
 ##### Syntax:
 
@@ -5172,7 +5172,7 @@ replaced with an actual element size.
 The optimizer is allowed to inline the memory copy when it\'s profitable
 to do so.
 
-#### \'`llvm.memset.element.unordered.atomic`\' Intrinsic {#int_memset_element_unordered_atomic}
+#### \'`llvm.memset.element.unordered.atomic`\' Intrinsic
 
 ##### Syntax:
 

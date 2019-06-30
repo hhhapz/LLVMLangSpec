@@ -1,11 +1,11 @@
-### Memory Access and Addressing Operations {#memoryops}
+### Memory Access and Addressing Operations
 
 A key design point of an SSA-based representation is how it represents
 memory. In LLVM, no memory locations are in SSA form, which makes things
 very simple. This section describes how to read, write, and allocate
 memory in LLVM.
 
-#### \'`alloca`\' Instruction {#i_alloca}
+#### \'`alloca`\' Instruction
 
 ##### Syntax:
 
@@ -53,7 +53,7 @@ the stack grows) is not specified.
 %ptr = alloca i32, align 1024                 ; yields i32*:ptr
 ```
 
-#### \'`load`\' Instruction {#i_load}
+#### \'`load`\' Instruction
 
 ##### Syntax:
 
@@ -123,7 +123,7 @@ undefined.
 
 The optional `!invariant.group` metadata must reference a single metadata name
 
-:   `<index>` corresponding to a metadata node with no entries. See
+`<index>` corresponding to a metadata node with no entries. See
     `invariant.group` metadata.
 
 The optional `!nonnull` metadata must reference a single metadata name
@@ -181,7 +181,7 @@ store i32 3, i32* %ptr                          ; yields void
 %val = load i32, i32* %ptr                      ; yields i32:val = i32 3
 ```
 
-#### \'`store`\' Instruction {#i_store}
+#### \'`store`\' Instruction
 
 ##### Syntax:
 
@@ -266,7 +266,7 @@ store i32 3, i32* %ptr                          ; yields void
 %val = load i32, i32* %ptr                      ; yields i32:val = i32 3
 ```
 
-#### \'`fence`\' Instruction {#i_fence}
+#### \'`fence`\' Instruction
 
 ##### Syntax:
 
@@ -313,7 +313,7 @@ fence syncscope("singlethread") seq_cst              ; yields void
 fence syncscope("agent") seq_cst                     ; yields void
 ```
 
-#### \'`cmpxchg`\' Instruction {#i_cmpxchg}
+#### \'`cmpxchg`\' Instruction
 
 ##### Syntax:
 
@@ -391,7 +391,7 @@ done:
   ...
 ```
 
-#### \'`atomicrmw`\' Instruction {#i_atomicrmw}
+#### \'`atomicrmw`\' Instruction
 
 ##### Syntax:
 
@@ -457,7 +457,7 @@ operation argument:
 %old = atomicrmw add i32* %ptr, i32 1 acquire                        ; yields i32
 ```
 
-#### \'`getelementptr`\' Instruction {#i_getelementptr}
+#### \'`getelementptr`\' Instruction
 
 ##### Syntax:
 

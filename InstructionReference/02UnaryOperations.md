@@ -1,4 +1,4 @@
-### Unary Operations {#unaryops}
+### Unary Operations
 
 Unary operators require a single operand, execute an operation on it,
 and produce a single value. The operand might represent multiple data,
@@ -6,7 +6,7 @@ as is the case with the `vector <t_vector>`{.interpreted-text
 role="ref"} data type. The result value has the same type as its
 operand.
 
-#### \'`fneg`\' Instruction {#i_fneg}
+#### \'`fneg`\' Instruction
 
 ##### Syntax:
 

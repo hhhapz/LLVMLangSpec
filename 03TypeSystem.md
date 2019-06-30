@@ -1,4 +1,4 @@
-Type System {#typesystem}
+Type System
 -----------
 
 The LLVM type system is one of the most important features of the
@@ -9,7 +9,7 @@ transformation. A strong type system makes it easier to read the
 generated code and enables novel analyses and transformations that are
 not feasible to perform on normal three address code representations.
 
-### Void Type {#t_void}
+### Void Type
 
 Overview
 
@@ -21,7 +21,7 @@ Syntax
 
     void
 
-### Function Type {#t_function}
+### Function Type
 
 Overview
 
@@ -67,18 +67,18 @@ Examples
                            containing two `i32` values
   ------------------------ ----------------------------------------------------------
 
-### First Class Types {#t_firstclass}
+### First Class Types
 
 The `first class <t_firstclass>`{.interpreted-text role="ref"} types are
 perhaps the most important. Values of these types are the only ones
 which can be produced by instructions.
 
-#### Single Value Types {#t_single_value}
+#### Single Value Types
 
 These are the types that are valid in registers from CodeGen\'s
 perspective.
 
-##### Integer Type {#t_integer}
+##### Integer Type
 
 Overview
 
@@ -105,7 +105,7 @@ value.
   `i1942652`       a really big integer of over 1 million bits.
   ---------------- ------------------------------------------------
 
-##### Floating-Point Types {#t_floating}
+##### Floating-Point Types
 
   Type          Description
   ------------- -------------------------------------------------
@@ -137,7 +137,7 @@ Syntax
 
     x86_mmx
 
-##### Pointer Type {#t_pointer}
+##### Pointer Type
 
 Overview
 
@@ -173,7 +173,7 @@ Examples
                         an `i32` value that resides in address space \#5.
   --------------------- ---------------------------------------------------------
 
-##### Vector Type {#t_vector}
+##### Vector Type
 
 Overview
 
@@ -206,7 +206,7 @@ Examples
   `<4 x i64*>`        Vector of 4 pointers to 64-bit integer values.
   ------------------- --------------------------------------------------
 
-#### Label Type {#t_label}
+#### Label Type
 
 Overview
 
@@ -218,7 +218,7 @@ Syntax
 
     label
 
-#### Token Type {#t_token}
+#### Token Type
 
 Overview
 
@@ -234,7 +234,7 @@ Syntax
 
     token
 
-#### Metadata Type {#t_metadata}
+#### Metadata Type
 
 Overview
 
@@ -248,7 +248,7 @@ Syntax
 
     metadata
 
-#### Aggregate Types {#t_aggregate}
+#### Aggregate Types
 
 Aggregate Types are a subset of derived types that can contain multiple
 member types. `Arrays <t_array>`{.interpreted-text role="ref"} and
@@ -256,7 +256,7 @@ member types. `Arrays <t_array>`{.interpreted-text role="ref"} and
 `Vectors <t_vector>`{.interpreted-text role="ref"} are not considered to
 be aggregate types.
 
-##### Array Type {#t_array}
+##### Array Type
 
 Overview
 
@@ -302,7 +302,7 @@ in LLVM with a zero length array type. An implementation of \'pascal
 style arrays\' in LLVM could use the type \"`{ i32, [0 x float]}`\", for
 example.
 
-##### Structure Type {#t_struct}
+##### Structure Type
 
 Overview
 
@@ -348,7 +348,7 @@ Examples
   `<{ i8, i32 }>`            A packed struct known to be 5 bytes in size.
   -------------------------- ------------------------------------------------------------
 
-##### Opaque Structure Types {#t_opaque}
+##### Opaque Structure Types
 
 Overview
 

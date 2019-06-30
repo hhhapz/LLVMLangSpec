@@ -1,4 +1,4 @@
-### Binary Operations {#binaryops}
+### Binary Operations
 
 Binary operators are used to do most of the computation in a program.
 They require two operands of the same type, execute an operation on
@@ -9,7 +9,7 @@ operands.
 
 There are several different binary operators:
 
-#### \'`add`\' Instruction {#i_add}
+#### \'`add`\' Instruction
 
 ##### Syntax:
 
@@ -50,7 +50,7 @@ role="ref"} if unsigned and/or signed overflow, respectively, occurs.
 <result> = add i32 4, %var          ; yields i32:result = 4 + %var
 ```
 
-#### \'`fadd`\' Instruction {#i_fadd}
+#### \'`fadd`\' Instruction
 
 ##### Syntax:
 
@@ -127,7 +127,7 @@ role="ref"} if unsigned and/or signed overflow, respectively, occurs.
 <result> = sub i32 0, %val          ; yields i32:result = -%var
 ```
 
-#### \'`fsub`\' Instruction {#i_fsub}
+#### \'`fsub`\' Instruction
 
 ##### Syntax:
 
@@ -206,7 +206,7 @@ role="ref"} if unsigned and/or signed overflow, respectively, occurs.
 <result> = mul i32 4, %var          ; yields i32:result = 4 * %var
 ```
 
-#### \'`fmul`\' Instruction {#i_fmul}
+#### \'`fmul`\' Instruction
 
 ##### Syntax:
 
@@ -317,7 +317,7 @@ result would be rounded.
 <result> = sdiv i32 4, %var          ; yields i32:result = 4 / %var
 ```
 
-#### \'`fdiv`\' Instruction {#i_fdiv}
+#### \'`fdiv`\' Instruction
 
 ##### Syntax:
 
@@ -435,7 +435,7 @@ return both the result of the division and the remainder.)
 <result> = srem i32 4, %var          ; yields i32:result = 4 % %var
 ```
 
-#### \'`frem`\' Instruction {#i_frem}
+#### \'`frem`\' Instruction
 
 ##### Syntax:
 

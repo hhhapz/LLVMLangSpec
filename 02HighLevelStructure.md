@@ -46,14 +46,14 @@ represented by a pointer to a memory location (in this case, a pointer
 to an array of char, and a pointer to a function), and have one of the
 following `linkage types <linkage>`{.interpreted-text role="ref"}.
 
-### Linkage Types {#linkage}
+### Linkage Types
 
 All Global Variables and Functions have one of the following types of
 linkage:
 
 `private`
 
-:   Global values with \"`private`\" linkage are only directly
+Global values with \"`private`\" linkage are only directly
     accessible by objects in the current module. In particular, linking
     code into a module with a private global value may cause the private
     to be renamed as necessary to avoid collisions. Because the symbol
@@ -62,13 +62,13 @@ linkage:
 
 `internal`
 
-:   Similar to private, but the value shows as a local symbol
+Similar to private, but the value shows as a local symbol
     (`STB_LOCAL` in the case of ELF) in the object file. This
     corresponds to the notion of the \'`static`\' keyword in C.
 
 `available_externally`
 
-:   Globals with \"`available_externally`\" linkage are never emitted
+Globals with \"`available_externally`\" linkage are never emitted
     into the object file corresponding to the LLVM module. From the
     linker\'s perspective, an `available_externally` global is
     equivalent to an external declaration. They exist to allow inlining
@@ -80,7 +80,7 @@ linkage:
 
 `linkonce`
 
-:   Globals with \"`linkonce`\" linkage are merged with other globals of
+Globals with \"`linkonce`\" linkage are merged with other globals of
     the same name when linkage occurs. This can be used to implement
     some forms of inline functions, templates, or other code which must
     be generated in each translation unit that uses it, but where the
@@ -95,14 +95,14 @@ linkage:
 
 `weak`
 
-:   \"`weak`\" linkage has the same merging semantics as `linkonce`
+\"`weak`\" linkage has the same merging semantics as `linkonce`
     linkage, except that unreferenced globals with `weak` linkage may
     not be discarded. This is used for globals that are declared
     \"weak\" in C source code.
 
 `common`
 
-:   \"`common`\" linkage is most similar to \"`weak`\" linkage, but they
+\"`common`\" linkage is most similar to \"`weak`\" linkage, but they
     are used for tentative definitions in C, such as \"`int X;`\" at
     global scope. Symbols with \"`common`\" linkage are merged in the
     same way as `weak symbols`, and they may not be deleted if
@@ -111,11 +111,11 @@ linkage:
     \'`constant <globalvars>`{.interpreted-text role="ref"}\'. Functions
     and aliases may not have common linkage.
 
-::: {#linkage_appending}
+
 
 `appending`
 
-:   \"`appending`\" linkage may only be applied to global variables of
+\"`appending`\" linkage may only be applied to global variables of
     pointer to array type. When two global variables with appending
     linkage are linked together, the two global arrays are appended
     together. This is the LLVM, typesafe, equivalent of having the
@@ -128,13 +128,13 @@ linkage:
 
 `extern_weak`
 
-:   The semantics of this linkage follow the ELF object file model: the
+The semantics of this linkage follow the ELF object file model: the
     symbol is weak until linked, if not linked, the symbol becomes null
     instead of being an undefined reference.
 
 `linkonce_odr`, `weak_odr`
 
-:   Some languages allow differing globals to be merged, such as two
+Some languages allow differing globals to be merged, such as two
     functions with different semantics. Other languages, such as `C++`,
     ensure that only equivalent globals are ever merged (the \"one
     definition rule\" \-\-- \"ODR\"). Such languages can use the
@@ -144,15 +144,15 @@ linkage:
 
 `external`
 
-:   If none of the above identifiers are used, the global is externally
+If none of the above identifiers are used, the global is externally
     visible, meaning that it participates in linkage and can be used to
     resolve external symbol references.
-:::
+
 
 It is illegal for a function *declaration* to have any linkage type
 other than `external` or `extern_weak`.
 
-### Calling Conventions {#callingconv}
+### Calling Conventions
 
 LLVM `functions <functionstructure>`{.interpreted-text role="ref"},
 `calls <i_call>`{.interpreted-text role="ref"} and
@@ -164,7 +164,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`ccc`\" - The C calling convention
 
-:   This calling convention (the default if no other calling convention
+This calling convention (the default if no other calling convention
     is specified) matches the target C calling conventions. This calling
     convention supports varargs function calls and tolerates some
     mismatch in the declared prototype and implemented declaration of
@@ -172,7 +172,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`fastcc`\" - The fast calling convention
 
-:   This calling convention attempts to make calls as fast as possible
+This calling convention attempts to make calls as fast as possible
     (e.g. by passing things in registers). This calling convention
     allows the target to use whatever tricks it wants to produce fast
     code for the target, without having to conform to an externally
@@ -184,7 +184,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`coldcc`\" - The cold calling convention
 
-:   This calling convention attempts to make code in the caller as
+This calling convention attempts to make code in the caller as
     efficient as possible under the assumption that the call is not
     commonly executed. As such, these calls often preserve all registers
     so that the call does not break any live ranges in the caller side.
@@ -195,7 +195,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`cc 10`\" - GHC convention
 
-:   This calling convention has been implemented specifically for use by
+This calling convention has been implemented specifically for use by
     the [Glasgow Haskell Compiler (GHC)](http://www.haskell.org/ghc). It
     passes everything in registers, going to extremes to achieve this by
     disabling callee save registers. This calling convention should not
@@ -216,7 +216,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`cc 11`\" - The HiPE calling convention
 
-:   This calling convention has been implemented specifically for use by
+This calling convention has been implemented specifically for use by
     the [High-Performance Erlang
     (HiPE)](http://www.it.uu.se/research/group/hipe/) compiler, *the*
     native code compiler of the [Ericsson\'s Open Source Erlang/OTP
@@ -233,14 +233,14 @@ are supported by LLVM, and more may be added in the future:
 
 \"`webkit_jscc`\" - WebKit\'s JavaScript calling convention
 
-:   This calling convention has been implemented for [WebKit FTL
+This calling convention has been implemented for [WebKit FTL
     JIT](https://trac.webkit.org/wiki/FTLJIT). It passes arguments on
     the stack right to left (as cdecl does), and returns a value in the
     platform\'s customary return register.
 
 \"`anyregcc`\" - Dynamic calling convention for code patching
 
-:   This is a special convention that supports patching an arbitrary
+This is a special convention that supports patching an arbitrary
     code sequence in place of a call site. This convention forces the
     call arguments into registers but allows them to be dynamically
     allocated. This can currently only be used with calls to
@@ -250,7 +250,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`preserve_mostcc`\" - The [PreserveMost]{.title-ref} calling convention
 
-:   This calling convention attempts to make the code in the caller as
+This calling convention attempts to make the code in the caller as
     unintrusive as possible. This convention behaves identically to the
     [C]{.title-ref} calling convention on how arguments and return
     values are passed, but it uses a different set of
@@ -290,7 +290,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`preserve_allcc`\" - The [PreserveAll]{.title-ref} calling convention
 
-:   This calling convention attempts to make the code in the caller even
+This calling convention attempts to make the code in the caller even
     less intrusive than the [PreserveMost]{.title-ref} calling
     convention. This calling convention also behaves identical to the
     [C]{.title-ref} calling convention on how arguments and return
@@ -315,7 +315,7 @@ are supported by LLVM, and more may be added in the future:
 
 \"`cxx_fast_tlscc`\" - The [CXX\_FAST\_TLS]{.title-ref} calling convention for access functions
 
-:   Clang generates an access function to access C++-style TLS. The
+Clang generates an access function to access C++-style TLS. The
     access function generally has an entry block, an exit block and an
     initialization block that is run at the first time. The entry and
     exit blocks can access a few TLS IR variables, each access will be
@@ -338,14 +338,14 @@ are supported by LLVM, and more may be added in the future:
 
 \"`swiftcc`\" - This calling convention is used for Swift language.
 
-:   -   On X86-64 RCX and R8 are available for additional integer
+-   On X86-64 RCX and R8 are available for additional integer
         returns, and XMM2 and XMM3 are available for additional
         FP/vector returns.
     -   On iOS platforms, we use AAPCS-VFP calling convention.
 
 \"`cc <n>`\" - Numbered convention
 
-:   Any calling convention may be specified by number, allowing
+Any calling convention may be specified by number, allowing
     target-specific calling conventions to be used. Target specific
     calling conventions start at 64.
 
@@ -353,14 +353,14 @@ More calling conventions can be added/defined on an as-needed basis, to
 support Pascal conventions or any other well-known target-independent
 convention.
 
-### Visibility Styles {#visibilitystyles}
+### Visibility Styles
 
 All Global Variables and Functions have one of the following visibility
 styles:
 
 \"`default`\" - Default style
 
-:   On targets that use the ELF object file format, default visibility
+On targets that use the ELF object file format, default visibility
     means that the declaration is visible to other modules and, in
     shared libraries, means that the declared entity may be overridden.
     On Darwin, default visibility means that the declaration is visible
@@ -369,7 +369,7 @@ styles:
 
 \"`hidden`\" - Hidden style
 
-:   Two declarations of an object with hidden visibility refer to the
+Two declarations of an object with hidden visibility refer to the
     same object if they are in the same shared object. Usually, hidden
     visibility indicates that the symbol will not be placed into the
     dynamic symbol table, so no other module (executable or shared
@@ -377,7 +377,7 @@ styles:
 
 \"`protected`\" - Protected style
 
-:   On ELF, protected visibility indicates that the symbol will be
+On ELF, protected visibility indicates that the symbol will be
     placed in the dynamic symbol table, but that references within the
     defining module will bind to the local symbol. That is, the symbol
     cannot be overridden by another module.
@@ -385,21 +385,21 @@ styles:
 A symbol with `internal` or `private` linkage must have `default`
 visibility.
 
-### DLL Storage Classes {#dllstorageclass}
+### DLL Storage Classes
 
 All Global Variables, Functions and Aliases can have one of the
 following DLL storage class:
 
 `dllimport`
 
-:   \"`dllimport`\" causes the compiler to reference a function or
+\"`dllimport`\" causes the compiler to reference a function or
     variable via a global pointer to a pointer that is set up by the DLL
     exporting the symbol. On Microsoft Windows targets, the pointer name
     is formed by combining `__imp_` and the function or variable name.
 
 `dllexport`
 
-:   \"`dllexport`\" causes the compiler to provide a global pointer to a
+\"`dllexport`\" causes the compiler to provide a global pointer to a
     pointer in a DLL, so that it can be referenced with the `dllimport`
     attribute. On Microsoft Windows targets, the pointer name is formed
     by combining `__imp_` and the function or variable name. Since this
@@ -407,7 +407,7 @@ following DLL storage class:
     assembler and linker know it is externally referenced and must
     refrain from deleting the symbol.
 
-### Thread Local Storage Models {#tls_model}
+### Thread Local Storage Models
 
 A variable may be defined as `thread_local`, which means that it will
 not be shared by threads (each thread will have a separated copy of the
@@ -416,15 +416,15 @@ TLS model may be specified:
 
 `localdynamic`
 
-:   For variables that are only used within the current shared library.
+For variables that are only used within the current shared library.
 
 `initialexec`
 
-:   For variables in modules that will not be loaded dynamically.
+For variables in modules that will not be loaded dynamically.
 
 `localexec`
 
-:   For variables defined in the executable and only used within it.
+For variables defined in the executable and only used within it.
 
 If no explicit model is given, the \"general dynamic\" model is used.
 
@@ -441,7 +441,7 @@ For platforms without linker support of ELF TLS model, the
 -femulated-tls flag can be used to generate GCC compatible emulated TLS
 code.
 
-### Runtime Preemption Specifiers {#runtime_preemption_model}
+### Runtime Preemption Specifiers
 
 Global variables, functions and aliases may have an optional runtime
 preemption specifier. If a preemption specifier isn\'t given explicitly,
@@ -449,17 +449,17 @@ then a symbol is assumed to be `dso_preemptable`.
 
 `dso_preemptable`
 
-:   Indicates that the function or variable may be replaced by a symbol
+Indicates that the function or variable may be replaced by a symbol
     from outside the linkage unit at runtime.
 
 `dso_local`
 
-:   The compiler may assume that a function or variable marked as
+The compiler may assume that a function or variable marked as
     `dso_local` will resolve to a symbol within the same linkage unit.
     Direct access will be generated even if the definition is not within
     this compilation unit.
 
-### Structure Types {#namedtypes}
+### Structure Types
 
 LLVM IR allows you to specify both \"identified\" and \"literal\"
 `structure
@@ -477,7 +477,7 @@ An example of an identified structure specification is:
 Prior to the LLVM 3.0 release, identified types were structurally
 uniqued. Only literal types are uniqued in recent versions of LLVM.
 
-### Non-Integral Pointer Type {#nointptrtype}
+### Non-Integral Pointer Type
 
 Note: non-integral pointer types are a work in progress, and they should
 be considered experimental at this time.
@@ -494,7 +494,7 @@ types are ill-typed, and so are `ptrtoint` instructions converting
 values of non-integral pointer types to integers. Vector versions of
 said instructions are ill-typed as well.
 
-### Global Variables {#globalvars}
+### Global Variables
 
 Global variables define regions of memory allocated at compilation time
 instead of run-time.
@@ -618,7 +618,7 @@ The following example defines a thread-local global with the
 @G = thread_local(initialexec) global i32 0, align 4
 ```
 
-### Functions {#functionstructure}
+### Functions
 
 LLVM function definitions consist of the \"`define`\" keyword, an
 optional `linkage type <linkage>`{.interpreted-text role="ref"}, an
@@ -715,7 +715,7 @@ Syntax:
 
     <type> [parameter Attrs] [name]
 
-### Aliases {#langref_aliases}
+### Aliases
 
 Aliases, unlike function or variables, don\'t create any new data. They
 are just a new symbol and metadata for an existing position.
@@ -758,7 +758,7 @@ some can only be checked when producing an object file:
 -   No global value in the expression can be a declaration, since that
     would require a relocation, which is not possible.
 
-### IFuncs {#langref_ifunc}
+### IFuncs
 
 IFuncs, like as aliases, don\'t create any new data or func. They are
 just a new symbol that dynamic linker resolves at runtime by calling a
@@ -776,7 +776,7 @@ Syntax:
 
     @<Name> = [Linkage] [Visibility] ifunc <IFuncTy>, <ResolverTy>* @<Resolver>
 
-### Comdats {#langref_comdats}
+### Comdats
 
 Comdat IR provides access to COFF and ELF object file COMDAT
 functionality.
@@ -797,25 +797,25 @@ The selection kind must be one of the following:
 
 `any`
 
-:   The linker may choose any COMDAT key, the choice is arbitrary.
+The linker may choose any COMDAT key, the choice is arbitrary.
 
 `exactmatch`
 
-:   The linker may choose any COMDAT key but the sections must contain
+The linker may choose any COMDAT key but the sections must contain
     the same data.
 
 `largest`
 
-:   The linker will choose the section containing the largest COMDAT
+The linker will choose the section containing the largest COMDAT
     key.
 
 `noduplicates`
 
-:   The linker requires that only section with this COMDAT key exist.
+The linker requires that only section with this COMDAT key exist.
 
 `samesize`
 
-:   The linker may choose any COMDAT key but the sections must contain
+The linker may choose any COMDAT key but the sections must contain
     the same amount of data.
 
 Note that the Mach-O platform doesn\'t support COMDATs, and ELF and
@@ -877,7 +877,7 @@ emit globals in individual sections (e.g. when
 [-data-sections]{.title-ref} or [-function-sections]{.title-ref} is
 supplied to [llc]{.title-ref}).
 
-### Named Metadata {#namedmetadatastructure}
+### Named Metadata
 
 Named metadata is a collection of metadata. `Metadata
 nodes <metadata>`{.interpreted-text role="ref"} (but not metadata
@@ -897,7 +897,7 @@ Syntax:
     ; A named metadata.
     !name = !{!0, !1, !2}
 
-### Parameter Attributes {#paramattrs}
+### Parameter Attributes
 
 The return type and each parameter of a function type may have a set of
 *parameter attributes* associated with them. Parameter attributes are
@@ -923,21 +923,21 @@ Currently, only the following parameter attributes are defined:
 
 `zeroext`
 
-:   This indicates to the code generator that the parameter or return
+This indicates to the code generator that the parameter or return
     value should be zero-extended to the extent required by the
     target\'s ABI by the caller (for a parameter) or the callee (for a
     return value).
 
 `signext`
 
-:   This indicates to the code generator that the parameter or return
+This indicates to the code generator that the parameter or return
     value should be sign-extended to the extent required by the
     target\'s ABI (which is usually 32-bits) by the caller (for a
     parameter) or the callee (for a return value).
 
 `inreg`
 
-:   This indicates that this parameter or return value should be treated
+This indicates that this parameter or return value should be treated
     in a special target-dependent fashion while emitting code for a
     function call or return (usually, by putting it in a register as
     opposed to memory, though some targets use it to distinguish between
@@ -946,7 +946,7 @@ Currently, only the following parameter attributes are defined:
 
 `byval`
 
-:   This indicates that the pointer parameter should really be passed by
+This indicates that the pointer parameter should really be passed by
     value to the function. The attribute implies that a hidden copy of
     the pointee is made between the caller and the callee, so the callee
     is unable to modify the value in the caller. This attribute is only
@@ -963,9 +963,9 @@ Currently, only the following parameter attributes are defined:
     site. If the alignment is not specified, then the code generator
     makes a target-specific assumption.
 
-::: {#attr_inalloca}
+
 `inalloca`
-:::
+
 
 > The `inalloca` argument attribute allows the caller to take the
 > address of outgoing stack arguments. An `inalloca` argument must be a
@@ -994,29 +994,29 @@ Currently, only the following parameter attributes are defined:
 
 `sret`
 
-:   This indicates that the pointer parameter specifies the address of a
+This indicates that the pointer parameter specifies the address of a
     structure that is the return value of the function in the source
     program. This pointer must be guaranteed by the caller to be valid:
     loads and stores to the structure may be assumed by the callee not
     to trap and to be properly aligned. This is not a valid attribute
     for return values.
 
-::: {#attr_align}
+
 
 `align <n>`
 
-:   This indicates that the pointer value may be assumed by the
+This indicates that the pointer value may be assumed by the
     optimizer to have the specified alignment.
 
     Note that this attribute has additional semantics when combined with
     the `byval` attribute.
-:::
 
-::: {#noalias}
+
+
 
 `noalias`
 
-:   This indicates that objects accessed via pointer values
+This indicates that objects accessed via pointer values
     `based <pointeraliasing>`{.interpreted-text role="ref"} on the
     argument or return value are not also accessed, during the execution
     of the function, via pointer values not *based* on the argument or
@@ -1040,24 +1040,24 @@ Currently, only the following parameter attributes are defined:
 
 `nocapture`
 
-:   This indicates that the callee does not make any copies of the
+This indicates that the callee does not make any copies of the
     pointer that outlive the callee itself. This is not a valid
     attribute for return values. Addresses used in volatile operations
     are considered to be captured.
-:::
 
-::: {#nest}
+
+
 
 `nest`
 
-:   This indicates that the pointer parameter can be excised using the
+This indicates that the pointer parameter can be excised using the
     `trampoline intrinsics <int_trampoline>`{.interpreted-text
     role="ref"}. This is not a valid attribute for return values and can
     only be applied to one parameter.
 
 `returned`
 
-:   This indicates that the function always returns the argument as its
+This indicates that the function always returns the argument as its
     return value. This is a hint to the optimizer and code generator
     used when generating the caller, allowing value propagation, tail
     call optimization, and omission of register saves and restores in
@@ -1069,14 +1069,14 @@ Currently, only the following parameter attributes are defined:
 
 `nonnull`
 
-:   This indicates that the parameter or return pointer is not null.
+This indicates that the parameter or return pointer is not null.
     This attribute may only be applied to pointer typed parameters. This
     is not checked or enforced by LLVM; if the parameter or return
     pointer is null, the behavior is undefined.
 
 `dereferenceable(<n>)`
 
-:   This indicates that the parameter or return pointer is
+This indicates that the parameter or return pointer is
     dereferenceable. This attribute may only be applied to pointer typed
     parameters. A pointer that is dereferenceable can be loaded from
     speculatively without a risk of trapping. The number of bytes known
@@ -1089,7 +1089,7 @@ Currently, only the following parameter attributes are defined:
 
 `dereferenceable_or_null(<n>)`
 
-:   This indicates that the parameter or return value isn\'t both
+This indicates that the parameter or return value isn\'t both
     non-null and non-dereferenceable (up to `<n>` bytes) at the same
     time. All non-null pointers tagged with
     `dereferenceable_or_null(<n>)` are `dereferenceable(<n>)`. For
@@ -1102,13 +1102,13 @@ Currently, only the following parameter attributes are defined:
 
 `swiftself`
 
-:   This indicates that the parameter is the self/context parameter.
+This indicates that the parameter is the self/context parameter.
     This is not a valid attribute for return values and can only be
     applied to one parameter.
 
 `swifterror`
 
-:   This attribute is motivated to model and optimize Swift error
+This attribute is motivated to model and optimize Swift error
     handling. It can be applied to a parameter with pointer to pointer
     type or a pointer-sized alloca. At the call site, the actual
     argument that corresponds to a `swifterror` parameter has to come
@@ -1129,9 +1129,9 @@ Currently, only the following parameter attributes are defined:
     argument does not alias any other memory visible within a function
     and that a `swifterror` alloca passed as an argument does not
     escape.
-:::
 
-### Garbage Collector Strategy Names {#gc}
+
+### Garbage Collector Strategy Names
 
 Each function may specify a garbage collector strategy name, which is
 simply a string:
@@ -1148,7 +1148,7 @@ algorithm. Note that LLVM itself does not contain a garbage collector,
 this functionality is restricted to generating machine code which can
 interoperate with a collector provided externally.
 
-### Prefix Data {#prefixdata}
+### Prefix Data
 
 Prefix data is data associated with a function which the code generator
 will emit immediately before the function\'s entrypoint. The purpose of
@@ -1187,7 +1187,7 @@ A function may have prefix data but no body. This has similar semantics
 to the `available_externally` linkage in that the data may be used by
 the optimizers but will not be emitted in the object file.
 
-### Prologue Data {#prologuedata}
+### Prologue Data
 
 The `prologue` attribute allows arbitrary code (encoded as bytes) to be
 inserted prior to the function body. This can be used for enabling
@@ -1225,12 +1225,12 @@ A function may have prologue data but no body. This has similar
 semantics to the `available_externally` linkage in that the data may be
 used by the optimizers but will not be emitted in the object file.
 
-### Personality Function {#personalityfn}
+### Personality Function
 
 The `personality` attribute permits functions to specify what function
 to use for exception handling.
 
-### Attribute Groups {#attrgrp}
+### Attribute Groups
 
 Attribute groups are groups of attributes that are referenced by objects
 within the IR. They are important for keeping `.ll` files readable,
@@ -1259,7 +1259,7 @@ attributes #1 = { "no-sse" }
 define void @f() #0 #1 { ... }
 ```
 
-### Function Attributes {#fnattrs}
+### Function Attributes
 
 Function attributes are set to communicate additional information about
 a function. Function attributes are considered to be part of the
@@ -1279,14 +1279,14 @@ define void @f() optsize { ... }
 
 `alignstack(<n>)`
 
-:   This attribute indicates that, when emitting the prologue and
+This attribute indicates that, when emitting the prologue and
     epilogue, the backend should forcibly align the stack pointer.
     Specify the desired alignment, which must be a power of two, in
     parentheses.
 
 `allocsize(<EltSizeParam>[, <NumEltsParam>])`
 
-:   This attribute indicates that the annotated function will always
+This attribute indicates that the annotated function will always
     return at least a given number of bytes (or null). Its arguments are
     zero-indexed parameter numbers; if one argument is provided, then
     it\'s assumed that at least `CallSite.Args[EltSizeParam]` bytes will
@@ -1299,13 +1299,13 @@ define void @f() optsize { ... }
 
 `alwaysinline`
 
-:   This attribute indicates that the inliner should attempt to inline
+This attribute indicates that the inliner should attempt to inline
     this function into callers whenever possible, ignoring any active
     inlining size threshold for this caller.
 
 `builtin`
 
-:   This indicates that the callee function at a call site should be
+This indicates that the callee function at a call site should be
     recognized as a built-in function, even though the function\'s
     declaration uses the `nobuiltin` attribute. This is only valid at
     call sites for direct calls to functions that are declared with the
@@ -1313,14 +1313,14 @@ define void @f() optsize { ... }
 
 `cold`
 
-:   This attribute indicates that this function is rarely called. When
+This attribute indicates that this function is rarely called. When
     computing edge weights, basic blocks post-dominated by a cold
     function call are also considered to be cold; and, thus, given low
     weight.
 
 `convergent`
 
-:   In some parallel execution models, there exist operations that
+In some parallel execution models, there exist operations that
     cannot be made control-dependent on any additional values. We call
     such operations `convergent`, and mark them with this attribute.
 
@@ -1345,14 +1345,14 @@ define void @f() optsize { ... }
 
 `inaccessiblememonly`
 
-:   This attribute indicates that the function may only access memory
+This attribute indicates that the function may only access memory
     that is not accessible by the module being compiled. This is a
     weaker form of `readnone`. If the function reads or writes other
     memory, the behavior is undefined.
 
 `inaccessiblemem_or_argmemonly`
 
-:   This attribute indicates that the function may only access memory
+This attribute indicates that the function may only access memory
     that is either not accessible by the module being compiled, or is
     pointed to by its pointer arguments. This is a weaker form of
     `argmemonly`. If the function reads or writes other memory, the
@@ -1360,14 +1360,14 @@ define void @f() optsize { ... }
 
 `inlinehint`
 
-:   This attribute indicates that the source code contained a hint that
+This attribute indicates that the source code contained a hint that
     inlining this function is desirable (such as the \"inline\" keyword
     in C/C++). It is just a hint; it imposes no requirements on the
     inliner.
 
 `jumptable`
 
-:   This attribute indicates that the function should be added to a
+This attribute indicates that the function should be added to a
     jump-instruction table at code-generation time, and that all
     address-taken references to this function should be replaced with a
     reference to the appropriate jump-instruction-table function
@@ -1378,7 +1378,7 @@ define void @f() optsize { ... }
 
 `minsize`
 
-:   This attribute suggests that optimization passes and code generator
+This attribute suggests that optimization passes and code generator
     passes make choices that keep the code size of this function as
     small as possible and perform optimizations that may sacrifice
     runtime performance in order to minimize the size of the generated
@@ -1386,18 +1386,18 @@ define void @f() optsize { ... }
 
 `naked`
 
-:   This attribute disables prologue / epilogue emission for the
+This attribute disables prologue / epilogue emission for the
     function. This can have very system-specific consequences.
 
 `no-jump-tables`
 
-:   When this attribute is set to true, the jump tables and lookup
+When this attribute is set to true, the jump tables and lookup
     tables that can be generated from a switch case lowering are
     disabled.
 
 `nobuiltin`
 
-:   This indicates that the callee function at a call site is not
+This indicates that the callee function at a call site is not
     recognized as a built-in function. LLVM will retain the original
     call and not replace it with equivalent code based on the semantics
     of the built-in function, unless the call site uses the `builtin`
@@ -1406,7 +1406,7 @@ define void @f() optsize { ... }
 
 `noduplicate`
 
-:   This attribute indicates that calls to the function cannot be
+This attribute indicates that calls to the function cannot be
     duplicated. A call to a `noduplicate` function may be moved within
     its parent function, but may not be duplicated within its parent
     function.
@@ -1418,47 +1418,47 @@ define void @f() optsize { ... }
 
 `noimplicitfloat`
 
-:   This attributes disables implicit floating-point instructions.
+This attributes disables implicit floating-point instructions.
 
 `noinline`
 
-:   This attribute indicates that the inliner should never inline this
+This attribute indicates that the inliner should never inline this
     function in any situation. This attribute may not be used together
     with the `alwaysinline` attribute.
 
 `nonlazybind`
 
-:   This attribute suppresses lazy symbol binding for the function. This
+This attribute suppresses lazy symbol binding for the function. This
     may make calls to the function faster, at the cost of extra program
     startup time if the function is not called during program startup.
 
 `noredzone`
 
-:   This attribute indicates that the code generator should not use a
+This attribute indicates that the code generator should not use a
     red zone, even if the target-specific ABI normally permits it.
 
 `indirect-tls-seg-refs`
 
-:   This attribute indicates that the code generator should not use
+This attribute indicates that the code generator should not use
     direct TLS access through segment registers, even if the
     target-specific ABI normally permits it.
 
 `noreturn`
 
-:   This function attribute indicates that the function never returns
+This function attribute indicates that the function never returns
     normally. This produces undefined behavior at runtime if the
     function ever does dynamically return.
 
 `norecurse`
 
-:   This function attribute indicates that the function does not call
+This function attribute indicates that the function does not call
     itself either directly or indirectly down any possible call path.
     This produces undefined behavior at runtime if the function ever
     does recurse.
 
 `nounwind`
 
-:   This function attribute indicates that the function never raises an
+This function attribute indicates that the function never raises an
     exception. If the function does raise an exception, its runtime
     behavior is undefined. However, functions marked nounwind may still
     trap or generate asynchronous exceptions. Exception handling schemes
@@ -1467,7 +1467,7 @@ define void @f() optsize { ... }
 
 `"null-pointer-is-valid"`
 
-:   If `"null-pointer-is-valid"` is set to `"true"`, then `null` address
+If `"null-pointer-is-valid"` is set to `"true"`, then `null` address
     in address-space 0 is considered to be a valid address for memory
     loads and stores. Any analysis or optimization should not treat
     dereferencing a pointer to `null` as undefined behavior in this
@@ -1477,12 +1477,12 @@ define void @f() optsize { ... }
 
 `optforfuzzing`
 
-:   This attribute indicates that this function should be optimized for
+This attribute indicates that this function should be optimized for
     maximum fuzzing signal.
 
 `optnone`
 
-:   This function attribute indicates that most optimization passes will
+This function attribute indicates that most optimization passes will
     skip this function, with the exception of interprocedural
     optimization passes. Code generation defaults to the \"fast\"
     instruction selector. This attribute cannot be used together with
@@ -1496,14 +1496,14 @@ define void @f() optsize { ... }
 
 `optsize`
 
-:   This attribute suggests that optimization passes and code generator
+This attribute suggests that optimization passes and code generator
     passes make choices that keep the code size of this function low,
     and otherwise do optimizations specifically to reduce code size as
     long as they do not significantly impact runtime performance.
 
 `"patchable-function"`
 
-:   This attribute tells the code generator that the code generated for
+This attribute tells the code generator that the code generated for
     this function needs to follow certain conventions that make it
     possible for a runtime function to patch over it later. The exact
     effect of this attribute depends on its string value, for which
@@ -1530,7 +1530,7 @@ define void @f() optsize { ... }
 
 `"probe-stack"`
 
-:   This attribute indicates that the function will trigger a guard
+This attribute indicates that the function will trigger a guard
     region in the end of the stack. It ensures that accesses to the
     stack must be no further apart than the size of the guard region to
     a previous access of the stack. It takes one required string value,
@@ -1545,7 +1545,7 @@ define void @f() optsize { ... }
 
 `readnone`
 
-:   On a function, this attribute indicates that the function computes
+On a function, this attribute indicates that the function computes
     its result (or decides to unwind an exception) based strictly on its
     arguments, without dereferencing any pointer arguments or otherwise
     accessing any mutable state (e.g. memory, control registers, etc)
@@ -1568,7 +1568,7 @@ define void @f() optsize { ... }
 
 `readonly`
 
-:   On a function, this attribute indicates that the function does not
+On a function, this attribute indicates that the function does not
     write through any pointer arguments (including `byval` arguments) or
     otherwise modify any state (e.g. memory, control registers, etc)
     visible to caller functions. It may dereference pointer arguments
@@ -1590,7 +1590,7 @@ define void @f() optsize { ... }
 
 `"stack-probe-size"`
 
-:   This attribute controls the behavior of stack probes: either the
+This attribute controls the behavior of stack probes: either the
     `"probe-stack"` attribute, or ABI-required stack probes, if any. It
     defines the size of the guard region. It ensures that if the
     function may use more stack space than the size of the guard region,
@@ -1607,11 +1607,11 @@ define void @f() optsize { ... }
 
 `"no-stack-arg-probe"`
 
-:   This attribute disables ABI-required stack probes, if any.
+This attribute disables ABI-required stack probes, if any.
 
 `writeonly`
 
-:   On a function, this attribute indicates that the function may write
+On a function, this attribute indicates that the function may write
     to but does not read from memory.
 
     On an argument, this attribute indicates that the function may write
@@ -1624,7 +1624,7 @@ define void @f() optsize { ... }
 
 `argmemonly`
 
-:   This attribute indicates that the only memory accesses inside
+This attribute indicates that the only memory accesses inside
     function are loads and stores from objects pointed to by its
     pointer-typed arguments, with arbitrary offsets. Or in other words,
     all memory operations in the function can refer to memory only using
@@ -1640,14 +1640,14 @@ define void @f() optsize { ... }
 
 `returns_twice`
 
-:   This attribute indicates that this function can return twice. The C
+This attribute indicates that this function can return twice. The C
     `setjmp` is an example of such a function. The compiler disables
     some optimizations (like tail calls) in the caller of these
     functions.
 
 `safestack`
 
-:   This attribute indicates that
+This attribute indicates that
     [SafeStack](http://clang.llvm.org/docs/SafeStack.html) protection is
     enabled for this function.
 
@@ -1658,29 +1658,29 @@ define void @f() optsize { ... }
 
 `sanitize_address`
 
-:   This attribute indicates that AddressSanitizer checks (dynamic
+This attribute indicates that AddressSanitizer checks (dynamic
     address safety analysis) are enabled for this function.
 
 `sanitize_memory`
 
-:   This attribute indicates that MemorySanitizer checks (dynamic
+This attribute indicates that MemorySanitizer checks (dynamic
     detection of accesses to uninitialized memory) are enabled for this
     function.
 
 `sanitize_thread`
 
-:   This attribute indicates that ThreadSanitizer checks (dynamic thread
+This attribute indicates that ThreadSanitizer checks (dynamic thread
     safety analysis) are enabled for this function.
 
 `sanitize_hwaddress`
 
-:   This attribute indicates that HWAddressSanitizer checks (dynamic
+This attribute indicates that HWAddressSanitizer checks (dynamic
     address safety analysis based on tagged pointers) are enabled for
     this function.
 
 `speculative_load_hardening`
 
-:   This attribute indicates that [Speculative Load
+This attribute indicates that [Speculative Load
     Hardening](https://llvm.org/docs/SpeculativeLoadHardening.html)
     should be enabled for the function body.
 
@@ -1700,7 +1700,7 @@ define void @f() optsize { ... }
 
 `speculatable`
 
-:   This function attribute indicates that the function does not have
+This function attribute indicates that the function does not have
     any effects besides calculating its result and does not have
     undefined behavior. Note that `speculatable` is not enough to
     conclude that along any particular execution path the number of
@@ -1713,7 +1713,7 @@ define void @f() optsize { ... }
 
 `ssp`
 
-:   This attribute indicates that the function should emit a stack
+This attribute indicates that the function should emit a stack
     smashing protector. It is in the form of a \"canary\" \-\-- a random
     value placed on the stack before the local variables that\'s checked
     upon return from the function to see if it has been overwritten. A
@@ -1737,7 +1737,7 @@ define void @f() optsize { ... }
 
 `sspreq`
 
-:   This attribute indicates that the function should *always* emit a
+This attribute indicates that the function should *always* emit a
     stack smashing protector. This overrides the `ssp` function
     attribute.
 
@@ -1759,7 +1759,7 @@ define void @f() optsize { ... }
 
 `sspstrong`
 
-:   This attribute indicates that the function should emit a stack
+This attribute indicates that the function should emit a stack
     smashing protector. This attribute causes a strong heuristic to be
     used when determining if a function needs stack protectors. The
     strong heuristic will enable protectors for functions with:
@@ -1788,7 +1788,7 @@ define void @f() optsize { ... }
 
 `strictfp`
 
-:   This attribute indicates that the function was called from a scope
+This attribute indicates that the function was called from a scope
     that requires strict floating-point semantics. LLVM will not attempt
     any optimizations that require assumptions about the floating-point
     rounding mode or that might alter the state of floating-point status
@@ -1797,14 +1797,14 @@ define void @f() optsize { ... }
 
 `"thunk"`
 
-:   This attribute indicates that the function will delegate to some
+This attribute indicates that the function will delegate to some
     other function with a tail call. The prototype of a thunk should not
     be used for optimization purposes. The caller is expected to cast
     the thunk prototype to match the thunk target prototype.
 
 `uwtable`
 
-:   This attribute indicates that the ABI being targeted requires that
+This attribute indicates that the ABI being targeted requires that
     an unwind table entry be produced for this function even if we can
     show that no exceptions passes by it. This is normally the case for
     the ELF x86-64 abi, but it can be disabled for some compilation
@@ -1812,7 +1812,7 @@ define void @f() optsize { ... }
 
 `nocf_check`
 
-:   This attribute indicates that no control-flow check will be
+This attribute indicates that no control-flow check will be
     performed on the attributed entity. It disables -fcf-protection=\<\>
     for a specific entity to fine grain the HW control flow protection
     mechanism. The flag is target independent and currently appertains
@@ -1820,12 +1820,12 @@ define void @f() optsize { ... }
 
 `shadowcallstack`
 
-:   This attribute indicates that the ShadowCallStack checks are enabled
+This attribute indicates that the ShadowCallStack checks are enabled
     for the function. The instrumentation checks that the return address
     for the function has not changed between the function prolog and
     eiplog. It is currently x86\_64-specific.
 
-### Global Attributes {#glattrs}
+### Global Attributes
 
 Attributes may be set to communicate additional information about a
 global variable. Unlike
@@ -1833,7 +1833,7 @@ global variable. Unlike
 attributes on a global variable are grouped into a single
 `attribute group <attrgrp>`{.interpreted-text role="ref"}.
 
-### Operand Bundles {#opbundles}
+### Operand Bundles
 
 Operand bundles are tagged sets of SSA values that can be associated
 with certain LLVM instructions (currently only `call` s and `invoke` s).
@@ -1875,7 +1875,7 @@ operand bundle to not miscompile programs containing it.
 
 More specific types of operand bundles are described below.
 
-#### Deoptimization Operand Bundles {#deopt_opbundles}
+#### Deoptimization Operand Bundles
 
 Deoptimization operand bundles are characterized by the `"deopt"`
 operand bundle tag. These operand bundles represent an alternate
@@ -1933,7 +1933,7 @@ caller\'s deoptimization state to the callee\'s deoptimization state is
 semantically equivalent to composing the caller\'s deoptimization
 continuation after the callee\'s deoptimization continuation.
 
-#### Funclet Operand Bundles {#ob_funclet}
+#### Funclet Operand Bundles
 
 Funclet operand bundles are characterized by the `"funclet"` operand
 bundle tag. These operand bundles indicate that a call site is within a
@@ -1964,7 +1964,7 @@ contain any values that are needed by the generated code. For more
 details, see `GC Transitions
 <gc_transition_args>`{.interpreted-text role="ref"}.
 
-### Module-Level Inline Assembly {#moduleasm}
+### Module-Level Inline Assembly
 
 Modules may contain \"module-level inline asm\" blocks, which
 corresponds to the GCC \"file scope inline asm\" blocks. These blocks
@@ -1984,7 +1984,7 @@ the two digit hex code for the number.
 Note that the assembly string *must* be parseable by LLVM\'s integrated
 assembler (unless it is disabled), even when emitting a `.s` file.
 
-### Data Layout {#langref_datalayout}
+### Data Layout
 
 A module may specify a target specific data layout string that specifies
 how data is to be laid out in memory. The syntax for the data layout is
@@ -2002,19 +2002,19 @@ as follows:
 
 `E`
 
-:   Specifies that the target lays out data in big-endian form. That is,
+Specifies that the target lays out data in big-endian form. That is,
     the bits with the most significance have the lowest address
     location.
 
 `e`
 
-:   Specifies that the target lays out data in little-endian form. That
+Specifies that the target lays out data in little-endian form. That
     is, the bits with the least significance have the lowest address
     location.
 
 `S<size>`
 
-:   Specifies the natural alignment of the stack in bits. Alignment
+Specifies the natural alignment of the stack in bits. Alignment
     promotion of stack variables is limited to the natural stack
     alignment to avoid dynamic stack realignment. The stack alignment
     must be a multiple of 8-bits. If omitted, the natural stack
@@ -2023,7 +2023,7 @@ as follows:
 
 `P<address space>`
 
-:   Specifies the address space that corresponds to program memory.
+Specifies the address space that corresponds to program memory.
     Harvard architectures can use this to specify what space LLVM should
     place things such as functions into. If omitted, the program memory
     space defaults to the default address space of 0, which corresponds
@@ -2032,12 +2032,12 @@ as follows:
 
 `A<address space>`
 
-:   Specifies the address space of objects created by \'`alloca`\'.
+Specifies the address space of objects created by \'`alloca`\'.
     Defaults to the default address space of 0.
 
 `p[n]:<size>:<abi>:<pref>:<idx>`
 
-:   This specifies the *size* of a pointer and its `<abi>` and
+This specifies the *size* of a pointer and its `<abi>` and
     `<pref>`erred alignments for address space `n`. The fourth parameter
     `<idx>` is a size of index that used for address calculation. If not
     specified, the default index size is equal to the pointer size. All
@@ -2047,17 +2047,17 @@ as follows:
 
 `i<size>:<abi>:<pref>`
 
-:   This specifies the alignment for an integer type of a given bit
+This specifies the alignment for an integer type of a given bit
     `<size>`. The value of `<size>` must be in the range \[1,2\^23).
 
 `v<size>:<abi>:<pref>`
 
-:   This specifies the alignment for a vector type of a given bit
+This specifies the alignment for a vector type of a given bit
     `<size>`.
 
 `f<size>:<abi>:<pref>`
 
-:   This specifies the alignment for a floating-point type of a given
+This specifies the alignment for a floating-point type of a given
     bit `<size>`. Only values of `<size>` that are supported by the
     target will work. 32 (float) and 64 (double) are supported on all
     targets; 80 or 128 (different flavors of long double) are also
@@ -2065,11 +2065,11 @@ as follows:
 
 `a:<abi>:<pref>`
 
-:   This specifies the alignment for an object of aggregate type.
+This specifies the alignment for an object of aggregate type.
 
 `m:<mangling>`
 
-:   If present, specifies that llvm names are mangled in the output.
+If present, specifies that llvm names are mangled in the output.
     Symbols prefixed with the mangling escape character `\01` are passed
     through directly to the assembler without the escape character. The
     mangling style options are
@@ -2089,7 +2089,7 @@ as follows:
 
 `n<size1>:<size2>:<size3>...`
 
-:   This specifies a set of native integer widths for the target CPU in
+This specifies a set of native integer widths for the target CPU in
     bits. For example, it might contain `n32` for 32-bit PowerPC,
     `n32:64` for PowerPC 64, or `n8:16:32:64` for X86-64. Elements of
     this set are considered to support most general arithmetic
@@ -2097,7 +2097,7 @@ as follows:
 
 `ni:<address space0>:<address space1>:<address space2>...`
 
-:   This specifies pointer types with the specified address spaces as
+This specifies pointer types with the specified address spaces as
     `Non-Integral Pointer Type <nointptrtype>`{.interpreted-text
     role="ref"} s. The `0` address space cannot be specified as
     non-integral.
@@ -2161,7 +2161,7 @@ generate a Data Layout and the optimization phases will operate
 accordingly and introduce target specificity into the IR with respect to
 these default specifications.
 
-### Target Triple {#langref_triple}
+### Target Triple
 
 A module may specify a target triple string that describes the target
 host. The syntax for the target triple is simply:
@@ -2180,7 +2180,7 @@ This information is passed along to the backend so that it generates
 code for the proper architecture. It\'s possible to override this on the
 command line with the `-mtriple` command line option.
 
-### Pointer Aliasing Rules {#pointeraliasing}
+### Pointer Aliasing Rules
 
 Any memory access must be done through a pointer value associated with
 an address range of the memory access, otherwise the behavior is
@@ -2231,7 +2231,7 @@ Consequently, type-based alias analysis, aka TBAA, aka
 encode additional information which specialized optimization passes may
 use to implement type-based alias analysis.
 
-### Volatile Memory Accesses {#volatile}
+### Volatile Memory Accesses
 
 Certain memory accesses, such as `load <i_load>`{.interpreted-text
 role="ref"}\'s, `store <i_store>`{.interpreted-text role="ref"}\'s, and
@@ -2247,7 +2247,7 @@ llvm.memcpy or llvm.memmove intrinsics even when those intrinsics are
 flagged volatile. Likewise, the backend should never split or merge
 target-legal volatile load/store instructions.
 
-::: {.admonition}
+{.admonition}
 Rationale
 
 Platforms may rely on volatile loads and stores of natively supported
@@ -2257,9 +2257,9 @@ support, but not necessarily for aggregate types. The frontend upholds
 these expectations, which are intentionally unspecified in the IR. The
 rules above ensure that IR transformations do not violate the
 frontend\'s contract with the language.
-:::
 
-### Memory Model for Concurrent Operations {#memmodel}
+
+### Memory Model for Concurrent Operations
 
 The LLVM IR does not define any way to start parallel threads of
 execution or to register signal handlers. Nonetheless, there are
@@ -2328,7 +2328,7 @@ which might not otherwise be stored is not allowed in general.
 from an address, introducing a store can change a load that may see
 exactly one write into a load that may see multiple writes.)
 
-### Atomic Memory Ordering Constraints {#ordering}
+### Atomic Memory Ordering Constraints
 
 Atomic instructions (`cmpxchg <i_cmpxchg>`{.interpreted-text
 role="ref"}, `atomicrmw <i_atomicrmw>`{.interpreted-text role="ref"},
@@ -2349,7 +2349,7 @@ For a simpler introduction to the ordering constraints, see the
 
 `unordered`
 
-:   The set of values that can be read is governed by the happens-before
+The set of values that can be read is governed by the happens-before
     partial order. A value cannot be read unless some operation wrote
     it. This is intended to provide a guarantee strong enough to model
     Java\'s non-volatile shared variables. This ordering cannot be
@@ -2358,7 +2358,7 @@ For a simpler introduction to the ordering constraints, see the
 
 `monotonic`
 
-:   In addition to the guarantees of `unordered`, there is a single
+In addition to the guarantees of `unordered`, there is a single
     total order for modifications by `monotonic` operations on each
     address. All modification orders must be compatible with the
     happens-before order. There is no guarantee that the modification
@@ -2378,13 +2378,13 @@ For a simpler introduction to the ordering constraints, see the
 
 `acquire`
 
-:   In addition to the guarantees of `monotonic`, a *synchronizes-with*
+In addition to the guarantees of `monotonic`, a *synchronizes-with*
     edge may be formed with a `release` operation. This is intended to
     model C++\'s `memory_order_acquire`.
 
 `release`
 
-:   In addition to the guarantees of `monotonic`, if this operation
+In addition to the guarantees of `monotonic`, if this operation
     writes a value which is subsequently read by an `acquire` operation,
     it *synchronizes-with* that operation. (This isn\'t a complete
     description; see the C++0x definition of a release sequence.) This
@@ -2392,12 +2392,12 @@ For a simpler introduction to the ordering constraints, see the
 
 `acq_rel` (acquire+release)
 
-:   Acts as both an `acquire` and `release` operation on its address.
+Acts as both an `acquire` and `release` operation on its address.
     This corresponds to the C++0x/C1x `memory_order_acq_rel`.
 
 `seq_cst` (sequentially consistent)
 
-:   In addition to the guarantees of `acq_rel` (`acquire` for an
+In addition to the guarantees of `acq_rel` (`acquire` for an
     operation that only reads, `release` for an operation that only
     writes), there is a global total order on all
     sequentially-consistent operations on all addresses, which is
@@ -2407,12 +2407,12 @@ For a simpler introduction to the ordering constraints, see the
     same address in this global order. This corresponds to the C++0x/C1x
     `memory_order_seq_cst` and Java volatile.
 
-::: {#syncscope}
+
 If an atomic operation is marked `syncscope("singlethread")`, it only
 *synchronizes with* and only participates in the seq\_cst total
 orderings of other operations running in the same thread (for example,
 in signal handlers).
-:::
+
 
 If an atomic operation is marked `syncscope("<target-scope>")`, where
 `<target-scope>` is a target specific synchronization scope, then it is
@@ -2425,7 +2425,7 @@ Otherwise, an atomic operation that is not marked
 other operations that are not marked `syncscope("singlethread")` or
 `syncscope("<target-scope>")`.
 
-### Floating-Point Environment {#floatenv}
+### Floating-Point Environment
 
 The default LLVM floating-point environment assumes that floating-point
 instructions do not have side effects. Results assume the
@@ -2441,7 +2441,7 @@ Code that requires different behavior than this should use the
 `Constrained Floating-Point Intrinsics <constrainedfp>`{.interpreted-text
 role="ref"}.
 
-### Fast-Math Flags {#fastmath}
+### Fast-Math Flags
 
 LLVM IR floating-point operations (`fadd <i_fadd>`{.interpreted-text
 role="ref"}, `fsub <i_fsub>`{.interpreted-text role="ref"},
@@ -2454,50 +2454,50 @@ flags to enable otherwise unsafe floating-point transformations.
 
 `nnan`
 
-:   No NaNs - Allow optimizations to assume the arguments and result are
+No NaNs - Allow optimizations to assume the arguments and result are
     not NaN. If an argument is a nan, or the result would be a nan, it
     produces a `poison value <poisonvalues>`{.interpreted-text
     role="ref"} instead.
 
 `ninf`
 
-:   No Infs - Allow optimizations to assume the arguments and result are
+No Infs - Allow optimizations to assume the arguments and result are
     not +/-Inf. If an argument is +/-Inf, or the result would be +/-Inf,
     it produces a `poison value <poisonvalues>`{.interpreted-text
     role="ref"} instead.
 
 `nsz`
 
-:   No Signed Zeros - Allow optimizations to treat the sign of a zero
+No Signed Zeros - Allow optimizations to treat the sign of a zero
     argument or result as insignificant.
 
 `arcp`
 
-:   Allow Reciprocal - Allow optimizations to use the reciprocal of an
+Allow Reciprocal - Allow optimizations to use the reciprocal of an
     argument rather than perform division.
 
 `contract`
 
-:   Allow floating-point contraction (e.g. fusing a multiply followed by
+Allow floating-point contraction (e.g. fusing a multiply followed by
     an addition into a fused multiply-and-add).
 
 `afn`
 
-:   Approximate functions - Allow substitution of approximate
+Approximate functions - Allow substitution of approximate
     calculations for functions (sin, log, sqrt, etc). See floating-point
     intrinsic definitions for places where this can apply to LLVM\'s
     intrinsic math functions.
 
 `reassoc`
 
-:   Allow reassociation transformations for floating-point instructions.
+Allow reassociation transformations for floating-point instructions.
     This may dramatically change results in floating-point.
 
 `fast`
 
-:   This flag implies all of the others.
+This flag implies all of the others.
 
-### Use-list Order Directives {#uselistorder}
+### Use-list Order Directives
 
 Use-list directives encode the in-memory order of each use-list,
 allowing the order to be recreated. `<order-indexes>` is a
@@ -2542,7 +2542,7 @@ Examples
     uselistorder i32 (i32) @bar, { 1, 0 }
     uselistorder_bb @foo, %bb, { 5, 1, 3, 2, 0, 4 }
 
-### Source Filename {#source_filename}
+### Source Filename
 
 The *source filename* string is set to the original module identifier,
 which will be the name of the compiled source file when compiling from

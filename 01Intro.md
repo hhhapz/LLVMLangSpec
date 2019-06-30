@@ -35,7 +35,7 @@ it can be proven that a C automatic variable is never accessed outside
 of the current function, allowing it to be promoted to a simple SSA
 value instead of a memory location.
 
-### Well-Formedness {#wellformed}
+### Well-Formedness
 
 It is important to note that this document describes \'well formed\'
 LLVM assembly language. There is a difference between what the parser

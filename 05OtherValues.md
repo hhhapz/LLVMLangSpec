@@ -1,7 +1,7 @@
 Other Values
 ------------
 
-### Inline Assembler Expressions {#inlineasmexprs}
+### Inline Assembler Expressions
 
 LLVM supports inline assembler expressions (as opposed to `Module-Level
 Inline Assembly <moduleasm>`{.interpreted-text role="ref"}) through the
@@ -542,7 +542,7 @@ XCore:
 
 -   `r`: A 32-bit integer register.
 
-#### Asm template argument modifiers {#inline-asm-modifiers}
+#### Asm template argument modifiers
 
 In the asm template string, modifiers can be used on the operand
 reference, like \"`${0:n}`\".

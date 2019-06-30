@@ -1,9 +1,9 @@
-### Other Operations {#otherops}
+### Other Operations
 
 The instructions in this category are the \"miscellaneous\"
 instructions, which defy better classification.
 
-#### \'`icmp`\' Instruction {#i_icmp}
+#### \'`icmp`\' Instruction
 
 ##### Syntax:
 
@@ -84,7 +84,7 @@ as the values being compared. Otherwise, the result is an `i1`.
 <result> = icmp sge i16  4, 5        ; yields: result=false
 ```
 
-#### \'`fcmp`\' Instruction {#i_fcmp}
+#### \'`fcmp`\' Instruction
 
 ##### Syntax:
 
@@ -190,7 +190,7 @@ role="ref"} for more information.
 <result> = fcmp ueq double 1.0, 2.0   ; yields: result=false
 ```
 
-#### \'`phi`\' Instruction {#i_phi}
+#### \'`phi`\' Instruction
 
 ##### Syntax:
 
@@ -228,13 +228,13 @@ executed just prior to the current block.
 ##### Example:
 
 ``` {.llvm}
-Loop:       ; Infinite loop that counts from 0 on up...
+Loop    ; Infinite loop that counts from 0 on up...
   %indvar = phi i32 [ 0, %LoopHeader ], [ %nextindvar, %Loop ]
   %nextindvar = add i32 %indvar, 1
   br label %Loop
 ```
 
-#### \'`select`\' Instruction {#i_select}
+#### \'`select`\' Instruction
 
 ##### Syntax:
 
@@ -272,7 +272,7 @@ same size, then an entire vector is selected.
 %X = select i1 true, i8 17, i8 42          ; yields i8:17
 ```
 
-#### \'`call`\' Instruction {#i_call}
+#### \'`call`\' Instruction
 
 ##### Syntax:
 
@@ -415,7 +415,7 @@ perform optimizations or generate code for them under that assumption.
 This is something we\'d like to change in the future to provide better
 support for freestanding environments and non-C-based languages.
 
-#### \'`va_arg`\' Instruction {#i_va_arg}
+#### \'`va_arg`\' Instruction
 
 ##### Syntax:
 
@@ -458,7 +458,7 @@ Note that the code generator does not yet fully support va\_arg on many
 targets. Also, it does not currently support va\_arg with aggregate
 types on any target.
 
-#### \'`landingpad`\' Instruction {#i_landingpad}
+#### \'`landingpad`\' Instruction
 
 ##### Syntax:
 
@@ -534,7 +534,7 @@ The `landingpad` instruction has several restrictions:
          filter [1 x i8**] [@_ZTId]
 ```
 
-#### \'`catchpad`\' Instruction {#i_catchpad}
+#### \'`catchpad`\' Instruction
 
 ##### Syntax:
 
@@ -597,7 +597,7 @@ handler0:
   %tok = catchpad within %cs [i8** @_ZTIi]
 ```
 
-#### \'`cleanuppad`\' Instruction {#i_cleanuppad}
+#### \'`cleanuppad`\' Instruction
 
 ##### Syntax:
 

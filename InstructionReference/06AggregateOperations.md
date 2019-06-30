@@ -3,7 +3,7 @@
 LLVM supports several instructions for working with
 `aggregate <t_aggregate>`{.interpreted-text role="ref"} values.
 
-#### \'`extractvalue`\' Instruction {#i_extractvalue}
+#### \'`extractvalue`\' Instruction
 
 ##### Syntax:
 
@@ -40,7 +40,7 @@ the index operands.
 <result> = extractvalue {i32, float} %agg, 0    ; yields i32
 ```
 
-#### \'`insertvalue`\' Instruction {#i_insertvalue}
+#### \'`insertvalue`\' Instruction
 
 ##### Syntax:
 

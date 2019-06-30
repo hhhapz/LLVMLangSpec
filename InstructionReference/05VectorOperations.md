@@ -7,7 +7,7 @@ While LLVM does directly support these vector operations, many
 sophisticated algorithms will want to use target-specific intrinsics to
 take full advantage of a specific target.
 
-#### \'`extractelement`\' Instruction {#i_extractelement}
+#### \'`extractelement`\' Instruction
 
 ##### Syntax:
 
@@ -38,7 +38,7 @@ length of `val`, the result is a
 <result> = extractelement <4 x i32> %vec, i32 0    ; yields i32
 ```
 
-#### \'`insertelement`\' Instruction {#i_insertelement}
+#### \'`insertelement`\' Instruction
 
 ##### Syntax:
 
@@ -71,7 +71,7 @@ If `idx` exceeds the length of `val`, the result is a
 <result> = insertelement <4 x i32> %vec, i32 1, i32 0    ; yields <4 x i32>
 ```
 
-#### \'`shufflevector`\' Instruction {#i_shufflevector}
+#### \'`shufflevector`\' Instruction
 
 ##### Syntax:
 

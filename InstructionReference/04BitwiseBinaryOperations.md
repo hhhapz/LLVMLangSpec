@@ -1,4 +1,4 @@
-### Bitwise Binary Operations {#bitwiseops}
+### Bitwise Binary Operations
 
 Bitwise binary operators are used to do various forms of bit-twiddling
 in a program. They are generally very efficient instructions and can

@@ -1,7 +1,7 @@
 Other Values
 ------------
 
-### Inline Assembler Expressions {#inlineasmexprs}
+### Inline Assembler Expressions
 
 LLVM supports inline assembler expressions (as opposed to `Module-Level
 Inline Assembly <moduleasm>`{.interpreted-text role="ref"}) through the
@@ -542,7 +542,7 @@ XCore:
 
 -   `r`: A 32-bit integer register.
 
-#### Asm template argument modifiers {#inline-asm-modifiers}
+#### Asm template argument modifiers
 
 In the asm template string, modifiers can be used on the operand
 reference, like \"`${0:n}`\".
@@ -726,7 +726,7 @@ Metadata does not have a type, and is not a value. If referenced from a
 
 All metadata are identified in syntax by a exclamation point (\'`!`\').
 
-### Metadata Nodes and Metadata Strings {#metadata-string}
+### Metadata Nodes and Metadata Strings
 
 A metadata string is a string surrounded by double quotes. It can
 contain any character by escaping non-printable characters with
@@ -802,7 +802,7 @@ with the exception of debug metadata (named metadata with the name
 More information about specific metadata nodes recognized by the
 optimizers and code generator is found below.
 
-#### Specialized Metadata Nodes {#specialized-metadata}
+#### Specialized Metadata Nodes
 
 Specialized metadata nodes are custom data structures in metadata (as
 opposed to generic tuples). Their fields are labelled, and can be
@@ -811,7 +811,7 @@ specified in any order.
 These aren\'t inherently debug info centric, but currently all the
 specialized metadata nodes are related to debug info.
 
-##### DICompileUnit {#DICompileUnit}
+##### DICompileUnit
 
 `DICompileUnit` nodes represent a compile unit. The `enums:`,
 `retainedTypes:`, `globals:`, `imports:` and `macros:` fields are tuples
@@ -835,7 +835,7 @@ scope. These descriptors are collected by a named metadata node
 `!llvm.dbg.cu`. They keep track of global variables, type information,
 and imported entities (declarations and namespaces).
 
-##### DIFile {#DIFile}
+##### DIFile
 
 `DIFile` nodes represent files. The `filename:` can include slashes.
 
@@ -849,7 +849,7 @@ Files are sometimes used in `scope:` fields, and are the only valid
 target for `file:` fields. Valid values for `checksumkind:` field are:
 {CSK\_None, CSK\_MD5, CSK\_SHA1}
 
-##### DIBasicType {#DIBasicType}
+##### DIBasicType
 
 `DIBasicType` nodes represent primitive types, such as `int`, `bool` and
 `float`. `tag:` defaults to `DW_TAG_base_type`.
@@ -873,7 +873,7 @@ DW_ATE_unsigned      = 7
 DW_ATE_unsigned_char = 8
 ```
 
-##### DISubroutineType {#DISubroutineType}
+##### DISubroutineType
 
 `DISubroutineType` nodes represent subroutine types. Their `types:`
 field refers to a tuple; the first operand is the return type, while the
@@ -887,7 +887,7 @@ as `void foo() {}` in C++).
 !2 = !DISubroutineType(types: !{null, !0, !1}) ; void (int, char)
 ```
 
-##### DIDerivedType {#DIDerivedType}
+##### DIDerivedType
 
 `DIDerivedType` nodes represent types derived from other types, such as
 qualified types.
@@ -915,14 +915,14 @@ DW_TAG_restrict_type      = 55
 DW_TAG_atomic_type        = 71
 ```
 
-::: {#DIDerivedTypeMember}
+
 `DW_TAG_member` is used to define a member of a `composite type
 <DICompositeType>`{.interpreted-text role="ref"}. The type of the member
 is the `baseType:`. The `offset:` is the member\'s bit offset. If the
 composite type has an ODR `identifier:` and does not set
 `flags: DIFwdDecl`, then the member is uniqued based only on its `name:`
 and `scope:`.
-:::
+
 
 `DW_TAG_inheritance` and `DW_TAG_friend` are used in the `elements:`
 field of `composite types <DICompositeType>`{.interpreted-text
@@ -936,7 +936,7 @@ are used to qualify the `baseType:`.
 
 Note that the `void *` type is expressed as a type derived from NULL.
 
-##### DICompositeType {#DICompositeType}
+##### DICompositeType
 
 `DICompositeType` nodes represent types composed of other types, like
 structures and unions. `elements:` points to a tuple of the composed
@@ -992,7 +992,7 @@ For `DW_TAG_structure_type`, `DW_TAG_class_type`, and
 `tag: DW_TAG_friend`; or `subprograms <DISubprogram>`{.interpreted-text
 role="ref"} with `isDefinition: false`.
 
-##### DISubrange {#DISubrange}
+##### DISubrange
 
 `DISubrange` nodes are the elements for `DW_TAG_array_type` variants of
 `DICompositeType`{.interpreted-text role="ref"}.
@@ -1023,7 +1023,7 @@ role="ref"} with `isDefinition: false`.
 !13 = !DISubrange(count: !12, lowerBound: 0)
 ```
 
-##### DIEnumerator {#DIEnumerator}
+##### DIEnumerator
 
 `DIEnumerator` nodes are the elements for `DW_TAG_enumeration_type`
 variants of `DICompositeType`{.interpreted-text role="ref"}.
@@ -1067,7 +1067,7 @@ source language constructs. `tag:` defaults to
 !0 = !DINamespace(name: "myawesomeproject", scope: !1, file: !2, line: 7)
 ```
 
-##### DIGlobalVariable {#DIGlobalVariable}
+##### DIGlobalVariable
 
 `DIGlobalVariable` nodes represent global variables in the source
 language.
@@ -1082,7 +1082,7 @@ language.
 All global variables should be referenced by the [globals:]{.title-ref}
 field of a `compile unit <DICompileUnit>`{.interpreted-text role="ref"}.
 
-##### DISubprogram {#DISubprogram}
+##### DISubprogram
 
 `DISubprogram` nodes represent functions from the source language. A
 `DISubprogram` may be attached to a function definition using `!dbg`
@@ -1092,13 +1092,13 @@ retained, even if their IR counterparts are optimized out of the IR. The
 `type:` field must point at an `DISubroutineType`{.interpreted-text
 role="ref"}.
 
-::: {#DISubprogramDeclaration}
+
 When `isDefinition: false`, subprograms describe a declaration in the
 type tree as opposed to a definition of a function. If the scope is a
 composite type with an ODR `identifier:` and that does not set
 `flags: DIFwdDecl`, then the subprogram declaration is uniqued based
 only on its `linkageName:` and `scope:`.
-:::
+
 
 ``` {.text}
 define void @_Z3foov() !dbg !0 {
@@ -1115,7 +1115,7 @@ define void @_Z3foov() !dbg !0 {
                             declaration: !7, variables: !8, thrownTypes: !9)
 ```
 
-##### DILexicalBlock {#DILexicalBlock}
+##### DILexicalBlock
 
 `DILexicalBlock` nodes describe nested blocks within a `subprogram
 <DISubprogram>`{.interpreted-text role="ref"}. The line number and
@@ -1129,7 +1129,7 @@ They are valid targets for `scope:` fields.
 Usually lexical blocks are `distinct` to prevent node merging based on
 operands.
 
-##### DILexicalBlockFile {#DILexicalBlockFile}
+##### DILexicalBlockFile
 
 `DILexicalBlockFile` nodes are used to discriminate between sections of
 a `lexical block <DILexicalBlock>`{.interpreted-text role="ref"}. The
@@ -1143,7 +1143,7 @@ within a single block in the source language.
 !2 = !DILexicalBlockFile(scope: !0, file: !4, discriminator: 1)
 ```
 
-##### DILocation {#DILocation}
+##### DILocation
 
 `DILocation` nodes represent source debug locations. The `scope:` field
 is mandatory, and points at an `DILexicalBlockFile`{.interpreted-text
@@ -1154,7 +1154,7 @@ role="ref"}, an `DILexicalBlock`{.interpreted-text role="ref"}, or an
 !0 = !DILocation(line: 2900, column: 42, scope: !1, inlinedAt: !2)
 ```
 
-##### DILocalVariable {#DILocalVariable}
+##### DILocalVariable
 
 `DILocalVariable` nodes represent local variables in the source
 language. If the `arg:` field is set to non-zero, then this variable is
@@ -1223,14 +1223,14 @@ to produce a direct value. For example, if the first operand is an
 indirect value, it may be necessary to insert `DW_OP_deref` into the
 DIExpresion in order to produce a valid debug intrinsic.
 
-::: {.note}
-::: {.admonition-title}
+{.note}
+{.admonition-title}
 Note
-:::
+
 
 A DIExpression is interpreted in the same way regardless of which kind
 of debug intrinsic it\'s attached to.
-:::
+
 
 ``` {.text}
 !0 = !DIExpression(DW_OP_deref)
@@ -1308,7 +1308,7 @@ relationship, and LLVM conservatively infers `MayAlias` between them.
 The rules mentioned in this section only pertain to TBAA nodes living
 under the same root.
 
-##### Semantics {#tbaa_node_semantics}
+##### Semantics
 
 The TBAA metadata system, referred to as \"struct path TBAA\" (not to be
 confused with `tbaa.struct`), consists of the following high level
@@ -1403,7 +1403,7 @@ with (e.g.) `ImmediateParent(OuterStructTy, 12)` = `(InnerStructTy, 0)`,
 `ImmediateParent(InnerStructTy, 0)` = `(IntScalarTy, 0)`, and
 `ImmediateParent(IntScalarTy, 0)` = `(CharScalarTy, 0)`.
 
-##### Representation {#tbaa_node_representation}
+##### Representation
 
 The root node of a TBAA type hierarchy is an `MDNode` with 0 operands or
 with exactly one `MDString` operand.
@@ -2094,7 +2094,7 @@ inner.for.end:
   ...
   br i1 %exitcond, label %outer.for.end, label %outer.for.body, !llvm.loop !2
 
-outer.for.end:                                          ; preds = %for.body
+outer.for.end                                       ; preds = %for.body
 ...
 !1 = distinct !{!1, !{!"llvm.loop.parallel_accesses", !3}}     ; metadata for the inner loop
 !2 = distinct !{!2, !{!"llvm.loop.parallel_accesses", !3, !4}} ; metadata for the outer loop
@@ -2218,14 +2218,14 @@ role="ref"},
 `function_entry_count<prof_node_function_entry_count>`{.interpreted-text
 role="ref"}, and `VP<prof_node_VP>`{.interpreted-text role="ref"}.
 
-##### branch\_weights {#prof_node_branch_weights}
+##### branch\_weights
 
 Branch weight metadata attached to a branch, select, switch or call
 instruction represents the likeliness of the associated branch being
 taken. For more information, see
 `BranchWeightMetadata`{.interpreted-text role="doc"}.
 
-##### function\_entry\_count {#prof_node_function_entry_count}
+##### function\_entry\_count
 
 Function entry count metadata can be attached to function definitions to
 record the number of times the function is called. Used with BFI
@@ -2233,7 +2233,7 @@ information, it is also used to derive the basic block profile count.
 For more information, see `BranchWeightMetadata`{.interpreted-text
 role="doc"}.
 
-##### VP {#prof_node_VP}
+##### VP
 
 VP (value profile) metadata can be attached to instructions that have
 value profile information. Currently this is indirect calls (where it

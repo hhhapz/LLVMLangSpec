@@ -66,7 +66,7 @@ at the left).
 
 There are no constants of type x86\_mmx.
 
-### Complex Constants {#complexconstants}
+### Complex Constants
 
 Complex constants are a (potentially recursive) combination of simple
 constants and smaller complex constants.
@@ -137,7 +137,7 @@ role="ref"} type. For example, the following is a legal LLVM file:
 @Z = global [2 x i32*] [ i32* @X, i32* @Y ]
 ```
 
-### Undefined Values {#undefvalues}
+### Undefined Values
 
 The string \'`undef`\' can be used anywhere a constant is expected, and
 indicates that the user of the value may receive an unspecified
@@ -277,7 +277,7 @@ match what was already there. However, a store *to* an undefined
 location could clobber arbitrary memory, therefore, it has undefined
 behavior.
 
-### Poison Values {#poisonvalues}
+### Poison Values
 
 Poison values are similar to
 `undef values <undefvalues>`{.interpreted-text role="ref"}, however they
@@ -382,7 +382,7 @@ second_end:
                                        ; behavior in this example).
 ```
 
-### Addresses of Basic Blocks {#blockaddress}
+### Addresses of Basic Blocks
 
 `blockaddress(@function, %block)`
 
@@ -403,7 +403,7 @@ is reconstituted before the `indirectbr` instruction.
 Finally, some targets may provide defined semantics when using the value
 as the operand to an inline assembly, but that is target specific.
 
-### Constant Expressions {#constantexprs}
+### Constant Expressions
 
 Constant expressions are used to allow expressions involving other
 constants to be used as constants. Constant expressions may be of any
