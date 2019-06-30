@@ -1,5 +1,5 @@
 - [Introduction](01Intro.md)
-- [High Level Structure](02.HighLevelStructure.md)
+- [High Level Structure](02HighLevelStructure.md)
 - [Type System](03TypeSystem.md)
 - [Constants](04Constants.md)
 - [Other Values](05OtherValues.md)
