@@ -17,5 +17,5 @@
 	- [Vector Operations](InstructionReference/06VectorOperations.md)
 	- [Aggregate Operations](InstructionReference/07AggregateOperations.md)
 	- [Memory Access and Addressing Operations](InstructionReference/08MemoryAccessAndAddressingOperators.md)
-	- [Other Operations](InstructionReference/09OtherOperators.md)
+	- [Other Operations](InstructionReference/09OtherOperations.md)
 - [Intrinsic Functions](11IntrinsicFunctions.md)
