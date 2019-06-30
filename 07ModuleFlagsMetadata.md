@@ -113,7 +113,6 @@ following key-value pairs:
 |                                   |   collection is supported. If present, its value must   |                
 |                                   |   be 6. This flag requires that the                     |                    
 |                                   |   `Objective-C Garbage Collection` flag have the value  |                
-|                                   |   2.                                                        
 
 Some important flag interactions:
 
