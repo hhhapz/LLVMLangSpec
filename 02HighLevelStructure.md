@@ -2516,16 +2516,12 @@ from outside their function\'s scope.
 
 Syntax
 
-:   
-
 <!-- -->
 
     uselistorder <ty> <value>, { <order-indexes> }
     uselistorder_bb @function, %block { <order-indexes> }
 
 Examples
-
-:   
 
 <!-- -->
 

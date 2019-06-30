@@ -1285,7 +1285,7 @@ included source file.
                   nodes: !3)
 ```
 
-#### \'`tbaa`\' Metadata
+#### \'`tbaa` Metadata
 
 In LLVM IR, memory does not have types, so LLVM\'s own type system is
 not suitable for doing type based alias analysis (TBAA). Instead,
@@ -1439,7 +1439,7 @@ AliasAnalysis methods](AliasAnalysis.html#OtherItfs)). The TBAA root of
 the access type and the base type of an access tag must be the same, and
 that is the TBAA root of the access tag.
 
-#### \'`tbaa.struct`\' Metadata
+#### \'`tbaa.struct` Metadata
 
 The `llvm.memcpy <int_memcpy>`{.interpreted-text role="ref"} is often
 used to implement aggregate assignment operations in C and similar
@@ -1469,7 +1469,7 @@ Note that the fields need not be contiguous. In this example, there is a
 4 byte gap between the two fields. This gap represents padding which
 does not carry useful data and need not be preserved.
 
-#### \'`noalias`\' and \'`alias.scope`\' Metadata
+#### \'`noalias`\' and \'`alias.scope` Metadata
 
 `noalias` and `alias.scope` metadata provide the ability to specify
 generic noalias memory-access sets. This means that some collection of
@@ -1539,7 +1539,7 @@ store float %2, float* %arrayidx.i2, align 4, !noalias !6
 store float %0, float* %arrayidx.i, align 4, !noalias !7
 ```
 
-#### \'`fpmath`\' Metadata
+#### \'`fpmath` Metadata
 
 `fpmath` metadata may be attached to any instruction of floating-point
 type. It can be used to express the maximum acceptable error in the
@@ -1560,7 +1560,7 @@ representing the maximum relative error, for example:
 !0 = !{ float 2.5 } ; maximum acceptable inaccuracy is 2.5 ULPs
 ```
 
-#### \'`range`\' Metadata
+#### \'`range` Metadata
 
 `range` metadata may be attached only to `load`, `call` and `invoke` of
 integer types. It expresses the possible ranges the loaded value or the
@@ -1594,7 +1594,7 @@ Examples:
 > \... !0 = !{ i8 0, i8 2 } !1 = !{ i8 255, i8 2 } !2 = !{ i8 0, i8 2,
 > i8 3, i8 6 } !3 = !{ i8 -2, i8 0, i8 3, i8 6 }
 
-#### \'`absolute_symbol`\' Metadata
+#### \'`absolute_symbol` Metadata
 
 `absolute_symbol` metadata may be attached to a global variable
 declaration. It marks the declaration as a reference to an absolute
@@ -1613,7 +1613,7 @@ Example (assuming 64-bit pointers):
 
 > \... !0 = !{ i64 0, i64 256 } !1 = !{ i64 -1, i64 -1 }
 
-#### \'`callees`\' Metadata
+#### \'`callees` Metadata
 
 `callees` metadata may be attached to indirect call sites. If `callees`
 metadata is attached to a call site, and any callee is not among the set
@@ -1629,7 +1629,7 @@ instruction may only target the `add` or `sub` functions:
 !0 = !{i64 (i64, i64)* @add, i64 (i64, i64)* @sub}
 ```
 
-#### \'`unpredictable`\' Metadata
+#### \'`unpredictable` Metadata
 
 `unpredictable` metadata may be attached to any branch or switch
 instruction. It can be used to express the unpredictability of control
@@ -1701,7 +1701,7 @@ loops if it believes it is safe to do so. The
 loop-carried memory dependencies can be helpful in determining the
 safety of these transformations.
 
-#### \'`llvm.loop.interleave.count`\' Metadata
+#### \'`llvm.loop.interleave.count` Metadata
 
 This metadata suggests an interleave count to the loop interleaver. The
 first operand is the string `llvm.loop.interleave.count` and the second
@@ -1716,7 +1716,7 @@ interleaving multiple iterations of the loop. If
 `llvm.loop.interleave.count` is set to 0 then the interleave count will
 be determined automatically.
 
-#### \'`llvm.loop.vectorize.enable`\' Metadata
+#### \'`llvm.loop.vectorize.enable` Metadata
 
 This metadata selectively enables or disables vectorization for the
 loop. The first operand is the string `llvm.loop.vectorize.enable` and
@@ -1728,7 +1728,7 @@ is enabled. A value of 0 disables vectorization:
 !1 = !{!"llvm.loop.vectorize.enable", i1 1}
 ```
 
-#### \'`llvm.loop.vectorize.width`\' Metadata
+#### \'`llvm.loop.vectorize.width` Metadata
 
 This metadata sets the target width of the vectorizer. The first operand
 is the string `llvm.loop.vectorize.width` and the second operand is an
@@ -1743,13 +1743,13 @@ vectorization of the loop. If `llvm.loop.vectorize.width` is set to 0 or
 if the loop does not have this metadata the width will be determined
 automatically.
 
-#### \'`llvm.loop.vectorize.followup_vectorized`\' Metadata
+#### \'`llvm.loop.vectorize.followup_vectorized` Metadata
 
 This metadata defines which loop attributes the vectorized loop will
 have. See `transformation-metadata`{.interpreted-text role="ref"} for
 details.
 
-#### \'`llvm.loop.vectorize.followup_epilogue`\' Metadata
+#### \'`llvm.loop.vectorize.followup_epilogue` Metadata
 
 This metadata defines which loop attributes the epilogue will have. The
 epilogue is not vectorized and is executed when either the vectorized
@@ -1759,7 +1759,7 @@ iterations that do not fill a complete set of vector lanes. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.vectorize.followup_all`\' Metadata
+#### \'`llvm.loop.vectorize.followup_all` Metadata
 
 Attributes in the metadata will be added to both the vectorized and
 epilogue loop. See
@@ -1775,7 +1775,7 @@ identification metadata. The `llvm.loop.unroll` metadata are only
 optimization hints and the unrolling will only be performed if the
 optimizer believes it is safe to do so.
 
-#### \'`llvm.loop.unroll.count`\' Metadata
+#### \'`llvm.loop.unroll.count` Metadata
 
 This metadata suggests an unroll factor to the loop unroller. The first
 operand is the string `llvm.loop.unroll.count` and the second operand is
@@ -1788,7 +1788,7 @@ a positive integer specifying the unroll factor. For example:
 If the trip count of the loop is less than the unroll count the loop
 will be partially unrolled.
 
-#### \'`llvm.loop.unroll.disable`\' Metadata
+#### \'`llvm.loop.unroll.disable` Metadata
 
 This metadata disables loop unrolling. The metadata has a single operand
 which is the string `llvm.loop.unroll.disable`. For example:
@@ -1797,7 +1797,7 @@ which is the string `llvm.loop.unroll.disable`. For example:
 !0 = !{!"llvm.loop.unroll.disable"}
 ```
 
-#### \'`llvm.loop.unroll.runtime.disable`\' Metadata
+#### \'`llvm.loop.unroll.runtime.disable` Metadata
 
 This metadata disables runtime loop unrolling. The metadata has a single
 operand which is the string `llvm.loop.unroll.runtime.disable`. For
@@ -1807,7 +1807,7 @@ example:
 !0 = !{!"llvm.loop.unroll.runtime.disable"}
 ```
 
-#### \'`llvm.loop.unroll.enable`\' Metadata
+#### \'`llvm.loop.unroll.enable` Metadata
 
 This metadata suggests that the loop should be fully unrolled if the
 trip count is known at compile time and partially unrolled if the trip
@@ -1818,7 +1818,7 @@ which is the string `llvm.loop.unroll.enable`. For example:
 !0 = !{!"llvm.loop.unroll.enable"}
 ```
 
-#### \'`llvm.loop.unroll.full`\' Metadata
+#### \'`llvm.loop.unroll.full` Metadata
 
 This metadata suggests that the loop should be unrolled fully. The
 metadata has a single operand which is the string
@@ -1828,14 +1828,14 @@ metadata has a single operand which is the string
 !0 = !{!"llvm.loop.unroll.full"}
 ```
 
-#### \'`llvm.loop.unroll.followup`\' Metadata
+#### \'`llvm.loop.unroll.followup` Metadata
 
 This metadata defines which loop attributes the unrolled loop will have.
 See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.unroll.followup_remainder`\' Metadata
+#### \'`llvm.loop.unroll.followup_remainder` Metadata
 
 This metadata defines which loop attributes the remainder loop after
 partial/runtime unrolling will have. See
@@ -1857,7 +1857,7 @@ and `llvm.loop.unroll_and_jam.count` do the same as for unroll.
 `llvm.loop.unroll_and_jam.full` is not supported. Again these are only
 hints and the normal safety checks will still be performed.
 
-#### \'`llvm.loop.unroll_and_jam.count`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.count` Metadata
 
 This metadata suggests an unroll and jam factor to use, similarly to
 `llvm.loop.unroll.count`. The first operand is the string
@@ -1871,7 +1871,7 @@ integer specifying the unroll factor. For example:
 If the trip count of the loop is less than the unroll count the loop
 will be partially unroll and jammed.
 
-#### \'`llvm.loop.unroll_and_jam.disable`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.disable` Metadata
 
 This metadata disables loop unroll and jamming. The metadata has a
 single operand which is the string `llvm.loop.unroll_and_jam.disable`.
@@ -1881,7 +1881,7 @@ For example:
 !0 = !{!"llvm.loop.unroll_and_jam.disable"}
 ```
 
-#### \'`llvm.loop.unroll_and_jam.enable`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.enable` Metadata
 
 This metadata suggests that the loop should be fully unroll and jammed
 if the trip count is known at compile time and partially unrolled if the
@@ -1893,21 +1893,21 @@ example:
 !0 = !{!"llvm.loop.unroll_and_jam.enable"}
 ```
 
-#### \'`llvm.loop.unroll_and_jam.followup_outer`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.followup_outer` Metadata
 
 This metadata defines which loop attributes the outer unrolled loop will
 have. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.unroll_and_jam.followup_inner`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.followup_inner` Metadata
 
 This metadata defines which loop attributes the inner jammed loop will
 have. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.unroll_and_jam.followup_remainder_outer`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.followup_remainder_outer` Metadata
 
 This metadata defines which attributes the epilogue of the outer loop
 will have. This loop is usually unrolled, meaning there is no such loop.
@@ -1915,7 +1915,7 @@ This attribute will be ignored in this case. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.unroll_and_jam.followup_remainder_inner`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.followup_remainder_inner` Metadata
 
 This metadata defines which attributes the inner loop of the epilogue
 will have. The outer epilogue will usually be unrolled, meaning there
@@ -1923,14 +1923,14 @@ can be multiple inner remainder loops. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.unroll_and_jam.followup_all`\' Metadata
+#### \'`llvm.loop.unroll_and_jam.followup_all` Metadata
 
 Attributes specified in the metadata is added to all
 `llvm.loop.unroll_and_jam.*` loops. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.licm_versioning.disable`\' Metadata
+#### \'`llvm.loop.licm_versioning.disable` Metadata
 
 This metadata indicates that the loop should not be versioned for the
 purpose of enabling loop-invariant code motion (LICM). The metadata has
@@ -1941,7 +1941,7 @@ a single operand which is the string
 !0 = !{!"llvm.loop.licm_versioning.disable"}
 ```
 
-#### \'`llvm.loop.distribute.enable`\' Metadata
+#### \'`llvm.loop.distribute.enable` Metadata
 
 Loop distribution allows splitting a loop into multiple loops.
 Currently, this is only performed if the entire loop cannot be
@@ -1962,35 +1962,35 @@ distribution:
 This metadata should be used in conjunction with `llvm.loop` loop
 identification metadata.
 
-#### \'`llvm.loop.distribute.followup_coincident`\' Metadata
+#### \'`llvm.loop.distribute.followup_coincident` Metadata
 
 This metadata defines which attributes extracted loops with no cyclic
 dependencies will have (i.e. can be vectorized). See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.distribute.followup_sequential`\' Metadata
+#### \'`llvm.loop.distribute.followup_sequential` Metadata
 
 This metadata defines which attributes the isolated loops with unsafe
 memory dependencies will have. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.distribute.followup_fallback`\' Metadata
+#### \'`llvm.loop.distribute.followup_fallback` Metadata
 
 If loop versioning is necessary, this metadata defined the attributes
 the non-distributed fallback version will have. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.loop.distribute.followup_all`\' Metadata
+#### \'`llvm.loop.distribute.followup_all` Metadata
 
 Thes attributes in this metdata is added to all followup loops of the
 loop distribution pass. See
 `Transformation Metadata <transformation-metadata>`{.interpreted-text
 role="ref"} for details.
 
-#### \'`llvm.access.group`\' Metadata
+#### \'`llvm.access.group` Metadata
 
 `llvm.access.group` metadata can be attached to any instruction that
 potentially accesses memory. It can point to a single distinct metadata
@@ -2023,7 +2023,7 @@ without pointing to it directly (which is not possible in global
 metadata). Currently, the only metadata making use of it is
 `llvm.loop.parallel_accesses`.
 
-#### \'`llvm.loop.parallel_accesses`\' Metadata
+#### \'`llvm.loop.parallel_accesses` Metadata
 
 The `llvm.loop.parallel_accesses` metadata refers to one or more access
 group metadata nodes (see `llvm.access.group`). It denotes that no
@@ -2102,7 +2102,7 @@ outer.for.end:                                          ; preds = %for.body
 !4 = distinct !{} ; access group for instructions in the outer, but not the inner loop
 ```
 
-#### \'`irr_loop`\' Metadata
+#### \'`irr_loop` Metadata
 
 `irr_loop` metadata may be attached to the terminator instruction of a
 basic block that\'s an irreducible loop header (note that an irreducible
@@ -2125,7 +2125,7 @@ br i1 %cmp, label %t1, label %t2, !irr_loop !0
 
 Irreducible loop header weights are typically based on profile data.
 
-#### \'`invariant.group`\' Metadata
+#### \'`invariant.group` Metadata
 
 The experimental `invariant.group` metadata may be attached to
 `load`/`store` instructions referencing a single metadata with no
@@ -2179,11 +2179,11 @@ invariant.group is tied to the SSA value of the pointer operand.
 Note that this is an experimental feature, which means that its
 semantics might change in the future.
 
-#### \'`type`\' Metadata
+#### \'`type` Metadata
 
 See `TypeMetadata`{.interpreted-text role="doc"}.
 
-#### \'`associated`\' Metadata
+#### \'`associated` Metadata
 
 The `associated` metadata may be attached to a global object declaration
 with a single argument that references another global object.
@@ -2208,7 +2208,7 @@ $a = comdat any
 !0 = !{i32* @a}
 ```
 
-#### \'`prof`\' Metadata
+#### \'`prof` Metadata
 
 The `prof` metadata is used to record profile data in the IR. The first
 operand of the metadata node indicates the profile metadata type. There

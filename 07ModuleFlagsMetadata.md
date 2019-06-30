@@ -30,56 +30,15 @@ behavior are always preserved.
 
 The following behaviors are supported:
 
-+------+---------------------------------------------------------------+
-| Valu | Behavior                                                      |
-| e    |                                                               |
-+======+===============================================================+
-| 1    | **Error**                                                     |
-|      |                                                               |
-|      | :   Emits an error if two values disagree, otherwise the      |
-|      |     resulting value is that of the operands.                  |
-+------+---------------------------------------------------------------+
-| 2    | **Warning**                                                   |
-|      |                                                               |
-|      | :   Emits a warning if two values disagree. The result value  |
-|      |     will be the operand for the flag from the first module    |
-|      |     being linked.                                             |
-+------+---------------------------------------------------------------+
-| 3    | **Require**                                                   |
-|      |                                                               |
-|      | :   Adds a requirement that another module flag be present    |
-|      |     and have a specified value after linking is performed.    |
-|      |     The value must be a metadata pair, where the first        |
-|      |     element of the pair is the ID of the module flag to be    |
-|      |     restricted, and the second element of the pair is the     |
-|      |     value the module flag should be restricted to. This       |
-|      |     behavior can be used to restrict the allowable results    |
-|      |     (via triggering of an error) of linking IDs with the      |
-|      |     **Override** behavior.                                    |
-+------+---------------------------------------------------------------+
-| 4    | **Override**                                                  |
-|      |                                                               |
-|      | :   Uses the specified value, regardless of the behavior or   |
-|      |     value of the other module. If both modules specify        |
-|      |     **Override**, but the values differ, an error will be     |
-|      |     emitted.                                                  |
-+------+---------------------------------------------------------------+
-| 5    | **Append**                                                    |
-|      |                                                               |
-|      | :   Appends the two values, which are required to be metadata |
-|      |     nodes.                                                    |
-+------+---------------------------------------------------------------+
-| 6    | **AppendUnique**                                              |
-|      |                                                               |
-|      | :   Appends the two values, which are required to be metadata |
-|      |     nodes. However, duplicate entries in the second list are  |
-|      |     dropped during the append operation.                      |
-+------+---------------------------------------------------------------+
-| 7    | **Max**                                                       |
-|      |                                                               |
-|      | :   Takes the max of the two values, which are required to be |
-|      |     integers.                                                 |
-+------+---------------------------------------------------------------+
+| Value | Behavior                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1     |  **Error**  Emits an error if two values disagree, otherwise the resulting value is that of the operands.                                               
+| 2     |   **Warning** Emits a warning if two values disagree. The result value will be the operand for the flag from the first module being linked.             
+| 3     |  **Require** Adds a requirement that another module flag be present and have a specified value after linking is performed. The value must be a metadata pair, where the first element of the pair is the ID of the module flag to be restricted, and the second element of the pair is the value the module flag should be restricted to. This behavior can be used to restrict the allowable results (via triggering of an error) of linking IDs with the **Override** behavior. |
+| 4     |  **Override**  Uses the specified value, regardless of the behavior or value of the other module. If both modules specify Override, but the values differ, an error will be emitted.                                                                                                                                                                                                                                                                                              |
+| 5     |  **Append**  Appends the two values, which are required to be metadata nodes.                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 6     |  **AppendUnique**   Appends the two values, which are required to be metadata nodes. However, duplicate entries in the second list are dropped during the append operation.                                                                                                                                                                                                                                                                                                       |
+| 7     |  **Max**  Takes the max of the two values, which are required to be integers.                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 It is an error for a particular unique flag ID to have multiple
 behaviors, except in the case of **Require** (which adds restrictions on
@@ -130,33 +89,31 @@ be merged rather than appended together.
 The Objective-C garbage collection module flags metadata consists of the
 following key-value pairs:
 
-  ----------------------------------------------------------------------------------------
-  Key                                Value
-  ---------------------------------- -----------------------------------------------------
-  `Objective-C Version`              **\[Required\]** \-\-- The Objective-C ABI version.
-                                     Valid values are 1 and 2.
-
-  `Objective-C Image Info Version`   **\[Required\]** \-\-- The version of the image info
-                                     section. Currently always 0.
-
-  `Objective-C Image Info Section`   **\[Required\]** \-\-- The section to place the
-                                     metadata. Valid values are
-                                     `"__OBJC, __image_info, regular"` for Objective-C ABI
-                                     version 1, and
-                                     `"__DATA,__objc_imageinfo, regular, no_dead_strip"`
-                                     for Objective-C ABI version 2.
-
-  `Objective-C Garbage Collection`   **\[Required\]** \-\-- Specifies whether garbage
-                                     collection is supported or not. Valid values are 0,
-                                     for no garbage collection, and 2, for garbage
-                                     collection supported.
-
-  `Objective-C GC Only`              **\[Optional\]** \-\-- Specifies that only garbage
-                                     collection is supported. If present, its value must
-                                     be 6. This flag requires that the
-                                     `Objective-C Garbage Collection` flag have the value
-                                     2.
-  ----------------------------------------------------------------------------------------
+| Key                               | Value                                                   |
+|-----------------------------------|---------------------------------------------------------|
+| `Objective-C Version`             | **\[Required\]** \-\-- The Objective-C ABI version.     |
+|                                   |   Valid values are 1 and 2.                             |
+|                                   |                                                         |    
+| `Objective-C Image Info Version`  | **\[Required\]** \-\-- The version of the image info    |
+|                                   |   section. Currently always 0.                          |
+|                                   |                                                         |
+| `Objective-C Image Info Section`  | **\[Required\]** \-\-- The section to place the         |
+|                                   |   metadata. Valid values are                            |    
+|                                   |   `"__OBJC, __image_info, regular"` for Objective-C ABI |    
+|                                   |   version 1, and                                        |        
+|                                   |   `"__DATA,__objc_imageinfo, regular, no_dead_strip"`   |
+|                                   |   for Objective-C ABI version 2.                        |    
+|                                   |                                                         |        
+| `Objective-C Garbage Collection`  | **\[Required\]** \-\-- Specifies whether garbage        |    
+|                                   |   collection is supported or not. Valid values are 0,   |        
+|                                   |   for no garbage collection, and 2, for garbage         |            
+|                                   |   collection supported.                                 |                
+|                                   |                                                         |                
+| `Objective-C GC Only`             | **\[Optional\]** \-\-- Specifies that only garbage      |            
+|                                   |   collection is supported. If present, its value must   |                
+|                                   |   be 6. This flag requires that the                     |                    
+|                                   |   `Objective-C Garbage Collection` flag have the value  |                
+|                                   |   2.                                                        
 
 Some important flag interactions:
 
@@ -178,18 +135,17 @@ visible at the IR level, namely wchar\_t width and enum width.
 To pass this information to the backend, these options are encoded in
 module flags metadata, using the following key-value pairs:
 
-+--------------------+-------------------------------------------------+
 | Key                | Value                                           |
-+====================+=================================================+
+|--------------------|-------------------------------------------------|
 | short\_wchar       | -   0 \-\-- sizeof(wchar\_t) == 4               |
 |                    | -   1 \-\-- sizeof(wchar\_t) == 2               |
-+--------------------+-------------------------------------------------+
+|                    |                                                 |
+|                    |                                                 |
 | short\_enum        | -   0 \-\-- Enums are at least as large as an   |
 |                    |     `int`.                                      |
 |                    | -   1 \-\-- Enums are stored in the smallest    |
 |                    |     integer type which can represent all of its |
 |                    |     values.                                     |
-+--------------------+-------------------------------------------------+
 
 For example, the following metadata section specifies that the module
 was compiled with a `wchar_t` width of 4 bytes, and the underlying type

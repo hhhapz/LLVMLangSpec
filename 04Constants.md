@@ -8,18 +8,18 @@ describes them all and their syntax.
 
 **Boolean constants**
 
-:   The two strings \'`true`\' and \'`false`\' are both valid constants
+The two strings \'`true`\' and \'`false`\' are both valid constants
     of the `i1` type.
 
 **Integer constants**
 
-:   Standard integers (such as \'4\') are constants of the
+Standard integers (such as \'4\') are constants of the
     `integer <t_integer>`{.interpreted-text role="ref"} type. Negative
     numbers may be used with integer types.
 
 **Floating-point constants**
 
-:   Floating-point constants use standard decimal notation (e.g.
+Floating-point constants use standard decimal notation (e.g.
     123.421), exponential notation (e.g. 1.23421e+2), or a more precise
     hexadecimal notation (see below). The assembler requires the exact
     decimal value of a floating-point constant. For example, the
@@ -29,13 +29,13 @@ describes them all and their syntax.
 
 **Null pointer constants**
 
-:   The identifier \'`null`\' is recognized as a null pointer constant
+The identifier \'`null`\' is recognized as a null pointer constant
     and must be of `pointer type <t_pointer>`{.interpreted-text
     role="ref"}.
 
 **Token constants**
 
-:   The identifier \'`none`\' is recognized as an empty token constant
+The identifier \'`none`\' is recognized as an empty token constant
     and must be of `token type <t_token>`{.interpreted-text role="ref"}.
 
 The one non-intuitive notation for constants is the hexadecimal form of
@@ -73,7 +73,7 @@ constants and smaller complex constants.
 
 **Structure constants**
 
-:   Structure constants are represented with notation similar to
+Structure constants are represented with notation similar to
     structure type definitions (a comma separated list of elements,
     surrounded by braces (`{}`)). For example:
     \"`{ i32 4, float 17.0, i32* @G }`\", where \"`@G`\" is declared as
@@ -83,7 +83,7 @@ constants and smaller complex constants.
 
 **Array constants**
 
-:   Array constants are represented with notation similar to array type
+Array constants are represented with notation similar to array type
     definitions (a comma separated list of elements, surrounded by
     square brackets (`[]`)). For example:
     \"`[ i32 42, i32 11, i32 74 ]`\". Array constants must have
@@ -95,7 +95,7 @@ constants and smaller complex constants.
 
 **Vector constants**
 
-:   Vector constants are represented with notation similar to vector
+Vector constants are represented with notation similar to vector
     type definitions (a comma separated list of elements, surrounded by
     less-than/greater-than\'s (`<>`)). For example:
     \"`< i32 42, i32 11, i32 74, i32 100 >`\". Vector constants must
@@ -104,7 +104,7 @@ constants and smaller complex constants.
 
 **Zero initialization**
 
-:   The string \'`zeroinitializer`\' can be used to zero initialize a
+The string \'`zeroinitializer`\' can be used to zero initialize a
     value to zero of *any* type, including scalar and
     `aggregate <t_aggregate>`{.interpreted-text role="ref"} types. This
     is often used to avoid having to print large zero initializers (e.g.
@@ -113,7 +113,7 @@ constants and smaller complex constants.
 
 **Metadata node**
 
-:   A metadata node is a constant tuple without types. For example:
+A metadata node is a constant tuple without types. For example:
     \"`!{!0, !{!2, !0}, !"test"}`\". Metadata can reference constant
     values, for example:
     \"`!{!0, i32 0, i8* @global, i64 (i64)* @function, !"str"}`\".
@@ -157,7 +157,7 @@ compiler more freedom to optimize. Here are some examples of
 
 > Safe:
 >
-> :   \%A = undef %B = undef %C = undef
+> \%A = undef %B = undef %C = undef
 >
 This is safe because all of the output bits are affected by the undef
 bits. Any output bit can have a zero or one depending on the input bits.
@@ -169,16 +169,16 @@ bits. Any output bit can have a zero or one depending on the input bits.
 
 > Safe:
 >
-> :   \%A = -1 %B = 0
+> \%A = -1 %B = 0
 >
 > Safe:
 >
-> :   \%A = %X ;; By choosing undef as 0 %B = %X ;; By choosing undef as
+> \%A = %X ;; By choosing undef as 0 %B = %X ;; By choosing undef as
 >     -1
 >
 > Unsafe:
 >
-> :   \%A = undef %B = undef
+> \%A = undef %B = undef
 >
 These logical operations have bits that are not always affected by the
 input. For example, if `%X` has a zero bit, then the output of the
@@ -198,11 +198,11 @@ allowing the \'`or`\' to be folded to -1.
 
 > Safe:
 >
-> :   \%A = %X (or %Y) %B = 42 (or %Y) %C = %Y
+> \%A = %X (or %Y) %B = 42 (or %Y) %C = %Y
 >
 > Unsafe:
 >
-> :   \%A = undef %B = undef %C = undef
+> \%A = undef %B = undef %C = undef
 >
 This set of examples shows that undefined \'`select`\' (and conditional
 branch) conditions can go *either way*, but they have to come from one
@@ -225,7 +225,7 @@ the whole \'`select`\' to be eliminated.
 
 > Safe:
 >
-> :   \%A = undef %B = undef %C = undef %D = undef %E = undef %F = undef
+> \%A = undef %B = undef %C = undef %D = undef %E = undef %F = undef
 >
 This example points out that two \'`undef`\' operands are not
 necessarily the same. This can be surprising to people (and also matches
@@ -246,7 +246,7 @@ with\" concept would not hold.
 
 > Safe:
 >
-> :   \%A = 0
+> \%A = 0
 >
 > b: unreachable
 
@@ -414,34 +414,34 @@ expressions:
 
 `trunc (CST to TYPE)`
 
-:   Perform the `trunc operation <i_trunc>`{.interpreted-text
+Perform the `trunc operation <i_trunc>`{.interpreted-text
     role="ref"} on constants.
 
 `zext (CST to TYPE)`
 
-:   Perform the `zext operation <i_zext>`{.interpreted-text role="ref"}
+Perform the `zext operation <i_zext>`{.interpreted-text role="ref"}
     on constants.
 
 `sext (CST to TYPE)`
 
-:   Perform the `sext operation <i_sext>`{.interpreted-text role="ref"}
+Perform the `sext operation <i_sext>`{.interpreted-text role="ref"}
     on constants.
 
 `fptrunc (CST to TYPE)`
 
-:   Truncate a floating-point constant to another floating-point type.
+Truncate a floating-point constant to another floating-point type.
     The size of CST must be larger than the size of TYPE. Both types
     must be floating-point.
 
 `fpext (CST to TYPE)`
 
-:   Floating-point extend a constant to another type. The size of CST
+Floating-point extend a constant to another type. The size of CST
     must be smaller or equal to the size of TYPE. Both types must be
     floating-point.
 
 `fptoui (CST to TYPE)`
 
-:   Convert a floating-point constant to the corresponding unsigned
+Convert a floating-point constant to the corresponding unsigned
     integer constant. TYPE must be a scalar or vector integer type. CST
     must be of scalar or vector floating-point type. Both CST and TYPE
     must be scalars, or vectors of the same number of elements. If the
@@ -450,7 +450,7 @@ expressions:
 
 `fptosi (CST to TYPE)`
 
-:   Convert a floating-point constant to the corresponding signed
+Convert a floating-point constant to the corresponding signed
     integer constant. TYPE must be a scalar or vector integer type. CST
     must be of scalar or vector floating-point type. Both CST and TYPE
     must be scalars, or vectors of the same number of elements. If the
@@ -459,7 +459,7 @@ expressions:
 
 `uitofp (CST to TYPE)`
 
-:   Convert an unsigned integer constant to the corresponding
+Convert an unsigned integer constant to the corresponding
     floating-point constant. TYPE must be a scalar or vector
     floating-point type. CST must be of scalar or vector integer type.
     Both CST and TYPE must be scalars, or vectors of the same number of
@@ -467,7 +467,7 @@ expressions:
 
 `sitofp (CST to TYPE)`
 
-:   Convert a signed integer constant to the corresponding
+Convert a signed integer constant to the corresponding
     floating-point constant. TYPE must be a scalar or vector
     floating-point type. CST must be of scalar or vector integer type.
     Both CST and TYPE must be scalars, or vectors of the same number of
@@ -475,23 +475,23 @@ expressions:
 
 `ptrtoint (CST to TYPE)`
 
-:   Perform the `ptrtoint operation <i_ptrtoint>`{.interpreted-text
+Perform the `ptrtoint operation <i_ptrtoint>`{.interpreted-text
     role="ref"} on constants.
 
 `inttoptr (CST to TYPE)`
 
-:   Perform the `inttoptr operation <i_inttoptr>`{.interpreted-text
+Perform the `inttoptr operation <i_inttoptr>`{.interpreted-text
     role="ref"} on constants. This one is *really* dangerous!
 
 `bitcast (CST to TYPE)`
 
-:   Convert a constant, CST, to another TYPE. The constraints of the
+Convert a constant, CST, to another TYPE. The constraints of the
     operands are the same as those for the
     `bitcast instruction <i_bitcast>`{.interpreted-text role="ref"}.
 
 `addrspacecast (CST to TYPE)`
 
-:   Convert a constant pointer or constant vector of pointer, CST, to
+Convert a constant pointer or constant vector of pointer, CST, to
     another TYPE in a different address space. The constraints of the
     operands are the same as those for the
     `addrspacecast instruction <i_addrspacecast>`{.interpreted-text
@@ -499,7 +499,7 @@ expressions:
 
 `getelementptr (TY, CSTPTR, IDX0, IDX1, ...)`, `getelementptr inbounds (TY, CSTPTR, IDX0, IDX1, ...)`
 
-:   Perform the
+Perform the
     `getelementptr operation <i_getelementptr>`{.interpreted-text
     role="ref"} on constants. As with the
     `getelementptr <i_getelementptr>`{.interpreted-text role="ref"}
@@ -508,40 +508,40 @@ expressions:
 
 `select (COND, VAL1, VAL2)`
 
-:   Perform the `select operation <i_select>`{.interpreted-text
+Perform the `select operation <i_select>`{.interpreted-text
     role="ref"} on constants.
 
 `icmp COND (VAL1, VAL2)`
 
-:   Perform the `icmp operation <i_icmp>`{.interpreted-text role="ref"}
+Perform the `icmp operation <i_icmp>`{.interpreted-text role="ref"}
     on constants.
 
 `fcmp COND (VAL1, VAL2)`
 
-:   Perform the `fcmp operation <i_fcmp>`{.interpreted-text role="ref"}
+Perform the `fcmp operation <i_fcmp>`{.interpreted-text role="ref"}
     on constants.
 
 `extractelement (VAL, IDX)`
 
-:   Perform the
+Perform the
     `extractelement operation <i_extractelement>`{.interpreted-text
     role="ref"} on constants.
 
 `insertelement (VAL, ELT, IDX)`
 
-:   Perform the
+Perform the
     `insertelement operation <i_insertelement>`{.interpreted-text
     role="ref"} on constants.
 
 `shufflevector (VEC1, VEC2, IDXMASK)`
 
-:   Perform the
+Perform the
     `shufflevector operation <i_shufflevector>`{.interpreted-text
     role="ref"} on constants.
 
 `extractvalue (VAL, IDX0, IDX1, ...)`
 
-:   Perform the
+Perform the
     `extractvalue operation <i_extractvalue>`{.interpreted-text
     role="ref"} on constants. The index list is interpreted in a similar
     manner as indices in a
@@ -550,7 +550,7 @@ expressions:
 
 `insertvalue (VAL, ELT, IDX0, IDX1, ...)`
 
-:   Perform the
+Perform the
     `insertvalue operation <i_insertvalue>`{.interpreted-text
     role="ref"} on constants. The index list is interpreted in a similar
     manner as indices in a
@@ -559,7 +559,7 @@ expressions:
 
 `OPCODE (LHS, RHS)`
 
-:   Perform the specified operation of the LHS and RHS constants. OPCODE
+Perform the specified operation of the LHS and RHS constants. OPCODE
     may be any of the `binary <binaryops>`{.interpreted-text role="ref"}
     or `bitwise
     binary <bitwiseops>`{.interpreted-text role="ref"} operations. The

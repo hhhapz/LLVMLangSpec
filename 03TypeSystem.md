@@ -13,13 +13,9 @@ not feasible to perform on normal three address code representations.
 
 Overview
 
-:   
-
 The void type does not represent any value and has no size.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -29,8 +25,6 @@ Syntax
 
 Overview
 
-:   
-
 The function type can be thought of as a function signature. It consists
 of a return type and a list of formal parameter types. The return type
 of a function type is a void type or first class type \-\-- except for
@@ -38,8 +32,6 @@ of a function type is a void type or first class type \-\-- except for
 `metadata <t_metadata>`{.interpreted-text role="ref"} types.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -57,9 +49,7 @@ functions. \'`<returntype>`\' is any type except
 
 Examples
 
-:   
-
-  ------------------------ ----------------------------------------------------------
+------------------------ ----------------------------------------------------------
   `i32 (i32)`              function taking an `i32`, returning an `i32`
 
   `float (i16, i32 *) *`   `Pointer <t_pointer>`{.interpreted-text role="ref"} to a
@@ -92,15 +82,11 @@ perspective.
 
 Overview
 
-:   
-
 The integer type is a very simple type that simply specifies an
 arbitrary bit width for the integer type desired. Any bit width from 1
 bit to 2^23^-1 (about 8 million) can be specified.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -138,8 +124,6 @@ binary128 respectively.
 
 Overview
 
-:   
-
 The x86\_mmx type represents a value held in an MMX register on an x86
 machine. The operations allowed on it are quite limited: parameters and
 return values, load and store, and bitcast. User-specified MMX
@@ -149,8 +133,6 @@ of this type.
 
 Syntax
 
-:   
-
 <!-- -->
 
     x86_mmx
@@ -158,8 +140,6 @@ Syntax
 ##### Pointer Type {#t_pointer}
 
 Overview
-
-:   
 
 The pointer type is used to specify memory locations. Pointers are
 commonly used to reference objects in memory.
@@ -174,17 +154,13 @@ permit pointers to labels (`label*`). Use `i8*` instead.
 
 Syntax
 
-:   
-
 <!-- -->
 
     <type> *
 
 Examples
 
-:   
-
-  --------------------- ---------------------------------------------------------
+--------------------- ---------------------------------------------------------
   `[4 x i32]*`          A `pointer <t_pointer>`{.interpreted-text role="ref"} to
                         `array <t_array>`{.interpreted-text role="ref"} of four
                         `i32` values.
@@ -201,8 +177,6 @@ Examples
 
 Overview
 
-:   
-
 A vector type is a simple derived type that represents a vector of
 elements. Vector types are used when multiple primitive data are
 operated in parallel using a single instruction (SIMD). A vector type
@@ -211,8 +185,6 @@ type. Vector types are considered
 `first class <t_firstclass>`{.interpreted-text role="ref"}.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -224,9 +196,7 @@ of size zero are not allowed.
 
 Examples
 
-:   
-
-  ------------------- --------------------------------------------------
+------------------- --------------------------------------------------
   `<4 x i32>`         Vector of 4 32-bit integer values.
 
   `<8 x float>`       Vector of 8 32-bit floating-point values.
@@ -240,13 +210,9 @@ Examples
 
 Overview
 
-:   
-
 The label type represents code labels.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -256,8 +222,6 @@ Syntax
 
 Overview
 
-:   
-
 The token type is used when a value is associated with an instruction
 but all uses of the value must not attempt to introspect or obscure it.
 As such, it is not appropriate to have a `phi <i_phi>`{.interpreted-text
@@ -265,8 +229,6 @@ role="ref"} or `select <i_select>`{.interpreted-text role="ref"} of type
 token.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -276,15 +238,11 @@ Syntax
 
 Overview
 
-:   
-
 The metadata type represents embedded metadata. No derived types may be
 created from metadata except for
 `function <t_function>`{.interpreted-text role="ref"} arguments.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -302,15 +260,11 @@ be aggregate types.
 
 Overview
 
-:   
-
 The array type is a very simple derived type that arranges elements
 sequentially in memory. The array type requires a size (number of
 elements) and an underlying data type.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -321,9 +275,7 @@ any type with a size.
 
 Examples
 
-:   
-
-  ------------------ --------------------------------------
+------------------ --------------------------------------
   `[40 x i32]`       Array of 40 32-bit integer values.
 
   `[41 x i32]`       Array of 41 32-bit integer values.
@@ -354,8 +306,6 @@ example.
 
 Overview
 
-:   
-
 The structure type is used to represent a collection of data members
 together in memory. The elements of a structure may be any type that has
 a size.
@@ -380,8 +330,6 @@ can be recursive, can be opaqued, and are never uniqued.
 
 Syntax
 
-:   
-
 <!-- -->
 
     %T1 = type { <type list> }     ; Identified normal struct type
@@ -389,9 +337,7 @@ Syntax
 
 Examples
 
-:   
-
-  -------------------------- ------------------------------------------------------------
+-------------------------- ------------------------------------------------------------
   `{ i32, i32, i32 }`        A triple of three `i32` values
 
   `{ float, i32 (i32) * }`   A pair, where the first element is a `float` and the second
@@ -406,15 +352,11 @@ Examples
 
 Overview
 
-:   
-
 Opaque structure types are used to represent named structure types that
 do not have a body specified. This corresponds (for example) to the C
 notion of a forward declared structure.
 
 Syntax
-
-:   
 
 <!-- -->
 
@@ -423,9 +365,7 @@ Syntax
 
 Examples
 
-:   
-
-  -------------- -------------------
+-------------- -------------------
   `opaque`       An opaque type.
 
   -------------- -------------------
